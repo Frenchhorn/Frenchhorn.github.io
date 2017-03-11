@@ -1,8 +1,48 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/foundation/5.5.3/css/foundation.min.css">
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/foundation/5.5.3/js/foundation.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/foundation/5.5.3/js/vendor/modernizr.js"></script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!--顶部导航栏-->
+
+<!--分页-->
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
-<img src="./public/a.png" alt="test">
+<nav class="top-bar" data-topbar>
+  <ul class="title-area">
+    <li class="name">
+      <!-- 如果你不需要标题或图标可以删掉它 -->
+      <h1><a>My website</a></h1>
+    </li>
+      <!-- 小屏幕上折叠按钮: 去掉 .menu-icon 类，可以去除图标。 
+      如果需要只显示图片，可以删除 "Menu" 文本 -->
+    <li class="toggle-topbar menu-icon"><a href="javascript:void(0);"><span>Menu</span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <ul class="left">
+      <li class="active"><a href="javascript:void(0);">Home</a></li>
+      <li><a href="/crawler/index.html">Crawler</a></li>
+      <li><a href="/comic/index.html">Comic</a></li>
+    </ul>
+  </section>
+</nav>
+
+<div style="padding:20px;">
+  <h3>基本头部工具条实例</h3>
+  <p>工具条是在页面头部的导航。</p>
+  <p><strong>注意:</strong> 在小屏幕上工具条会被一个按钮取代 (重置窗口，查看效果)。</p>
+  <p>在按钮被点击后导航项将显示。</p>
+</div>
 </body>
+<script>
+$(document).ready(function() {
+    $(document).foundation();
+})
+</script>
 </html>
