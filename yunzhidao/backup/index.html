@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="max-age=2592000">
+    <meta name="renderer" content="webkit">
+
+    <meta name="format-detection" content="telephone=no">
+
+    <meta http-equiv="Content-Language" content="zh-cn">
+
+    <!--<link rel="icon" type="image/png" href="assets/i/favicon.png">-->
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!--<link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">-->
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI">
+    <!--<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">-->
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <!--<meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">-->
+    <meta name="msapplication-TileColor" content="#0e90d2">
+
+    <title>安利云知道</title>
+    <link rel="stylesheet" href="styles/style.min.css">
+</head>
+<body>
+<div class="main-con">
+    <div class="qr_code_pc_outer">
+        <div class="qr_code_pc_inner">
+            <div class="qr_code_pc">
+                <img id="js_pc_qr_code_img" class="qr_code_pc_img" src="images/qrcode.jpg">
+                <p>关注安利云服务<br>产品服务全知道</p>
+            </div>
+        </div>
+    </div>
+    <div class="go-top">
+        <div class="inner-con">
+            <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+                <a href="#top" title="回到顶部">
+                    <span class="am-gotop-title">回到顶部</span>
+                    <i class="am-gotop-icon am-icon-chevron-up"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <header class="index" style="background-image: url('images/bg_index.jpg')">
+        <div class="bg-b"></div>
+        <div class="bar-t">
+            <!--<i class="logo-amway-w"></i>-->
+            <button type="button" class="btn-user"></button>
+        </div>
+        <div class="search-bar am-text-center">
+            <div class="option-group">
+                <label class="radio-label">
+                    <input class="radio" type="radio" name="search-options" value="全部" id="option1" checked="checked"><span class="text">全部</span>
+                </label>
+                <label class="radio-label">
+                    <input class="radio" type="radio" name="search-options" value="视频" id="option2"><span class="text">视频</span>
+                </label>
+                <label class="radio-label">
+                    <input class="radio" type="radio" name="search-options" value="图片" id="option3"><span class="text">图片</span>
+                </label>
+            </div>
+            <div class="am-input-group am-padding-left am-padding-right" onclick="location.href='search_input.html'">
+                <span class="am-input-group-btn">
+                    <button class="search-btn am-btn am-btn-default" type="button">
+                        <i class="svg-icon icon-17"></i>
+                    </button>
+                </span>
+                <!--<input  type="text" class="search-input am-form-field" placeholder="请输入搜索名称">-->
+                <div class="search-input am-form-field">请输入搜索名称</div>
+            </div>
+        </div>
+    </header>
+    <div class="content-body index">
+        <div class="content-group">
+            <h3 class="title-left am-margin-top">热门分类</h3>
+            <div class="content-box">
+                <div class="am-tabs" data-am-tabs>
+                    <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+                        <li class="am-active"><a href="#tab1">资讯</a></li>
+                        <li><a href="#tab2">视频</a></li>
+                        <li><a href="#tab3">图片</a></li>
+                        <li><a href="#tab4">培训</a></li>
+                    </ul>
+
+                    <div class="am-tabs-bd">
+                        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                            <!--<ul class="btn-list am-avg-sm-4">
+                                <li><a href="hot_category.html"><i class="svg-icon icon-1"></i><span
+                                    class="text am-text-truncate">1</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-2"></i><span
+                                    class="text am-text-truncate">2</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-3"></i><span
+                                    class="text am-text-truncate">3</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-4"></i><span
+                                    class="text am-text-truncate">4</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-5"></i><span
+                                    class="text am-text-truncate">5</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-6"></i><span
+                                    class="text am-text-truncate">6</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-7"></i><span
+                                    class="text am-text-truncate">7</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-8"></i><span
+                                    class="text am-text-truncate">8</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-9"></i><span
+                                    class="text am-text-truncate">9</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-10"></i><span
+                                    class="text am-text-truncate">10</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-11"></i><span
+                                    class="text am-text-truncate">11</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-12"></i><span
+                                    class="text am-text-truncate">12</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-13"></i><span
+                                    class="text am-text-truncate">13</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-14"></i><span
+                                    class="text am-text-truncate">14</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-15"></i><span
+                                    class="text am-text-truncate">15</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-16"></i><span
+                                    class="text am-text-truncate">16</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-17"></i><span
+                                    class="text am-text-truncate">17</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-18"></i><span
+                                    class="text am-text-truncate">18</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-19"></i><span
+                                    class="text am-text-truncate">19</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-20"></i><span
+                                    class="text am-text-truncate">20</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-21"></i><span
+                                    class="text am-text-truncate">21</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-22"></i><span
+                                    class="text am-text-truncate">22</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-23"></i><span
+                                    class="text am-text-truncate">23</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-24"></i><span
+                                    class="text am-text-truncate">24</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-25"></i><span
+                                    class="text am-text-truncate">25</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-26"></i><span
+                                    class="text am-text-truncate">26</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-27"></i><span
+                                    class="text am-text-truncate">27</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-28"></i><span
+                                    class="text am-text-truncate">28</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-29"></i><span
+                                    class="text am-text-truncate">29</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-30"></i><span
+                                    class="text am-text-truncate">30</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-31"></i><span
+                                    class="text am-text-truncate">31</span></a></li>
+                                <li></li>
+                            </ul>-->
+                            <ul class="btn-list am-avg-sm-4">
+                                <li><a href="hot_category.html"><i class="svg-icon icon-1"></i><span class="text am-text-truncate">纽崔莱</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-2"></i><span class="text am-text-truncate">雅姿</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-3"></i><span class="text am-text-truncate">个人护理</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-4"></i><span class="text am-text-truncate">家居科技</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-19"></i><span class="text am-text-truncate">海外购</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-20"></i><span class="text am-text-truncate">美好生活</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-21"></i><span class="text am-text-truncate">走近安利</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-22"></i><span class="text am-text-truncate">媒体看安利</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-23"></i><span class="text am-text-truncate">事业机会</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-24"></i><span class="text am-text-truncate">反击谣言</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-33"></i><span class="text am-text-truncate">企业文化</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-34"></i><span class="text am-text-truncate">九宫格</span></a></li>
+                            </ul>
+                        </div>
+                        <div class="am-tab-panel am-fade" id="tab2">
+                            <ul class="btn-list am-avg-sm-4">
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-26"></i><span class="text am-text-truncate">健康</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-27"></i><span class="text am-text-truncate">美丽</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-28"></i><span class="text am-text-truncate">生活</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-29"></i><span class="text am-text-truncate">事业</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-30"></i><span class="text am-text-truncate">Amway</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-35"></i><span class="text am-text-truncate">企业文化</span></a></li>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <div class="am-tab-panel am-fade" id="tab3">
+                            <ul class="btn-list-img am-avg-sm-3">
+                                <li>
+                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_4.png')">
+                                        <span class="text am-text-truncate bgc dark-green">纽崔莱</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_7.png')">
+                                        <span class="text am-text-truncate bgc brown">雅姿</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_2.png')">
+                                        <span class="text am-text-truncate bgc blue">家居科技</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_3.png')">
+                                        <span class="text am-text-truncate bgc green">优生活</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_5.png')">
+                                        <span class="text am-text-truncate bgc light-blue">个人护理</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_1.png')">
+                                        <span class="text am-text-truncate bgc red">海外购</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_6.png')">
+                                        <span class="text am-text-truncate bgc dark-blue">安利产品单张</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="am-tab-panel am-fade" id="tab4">
+                            <ul class="btn-list am-avg-sm-4">
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-1"></i><span class="text am-text-truncate">纽崔莱</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-2"></i><span class="text am-text-truncate">雅姿</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-4"></i><span class="text am-text-truncate">家居科技</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-5"></i><span class="text am-text-truncate">家居护理</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-3"></i><span class="text am-text-truncate">个人护理</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-36"></i><span class="text am-text-truncate">数字化</span></a></li>
+
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-6"></i><span class="text am-text-truncate">业务技能</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-7"></i><span class="text am-text-truncate">制度和守则</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-8"></i><span class="text am-text-truncate">礼仪修养</span></a></li>
+                                <li><a href="javascript:void(0);"><i class="svg-icon icon-11"></i><span class="text am-text-truncate">走近安利</span></a></li>
+                                <li></li>
+                                <li></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn-w am-margin-top-xs">
+                <i class="svg-icon icon-13"></i>
+                <span>推广助手</span>
+            </button>
+        </div>
+        <div class="content-group">
+            <h3 class="title-left am-margin-top">今日更新</h3>
+            <div class="content-box">
+                <ul class="info-list">
+                    <li>
+                        <a href="javascript:void (0);" class="thumbnail" style="background-image: url('images/thumbnail/info_list_1.png')">
+                            <img src="images/thumbnail/info_list_1.png">
+                            <div class="tag blue am-text-truncate">公告</div>
+                        </a>
+                        <div class="text-con">
+                            <a href="javascript:void (0);" class="desc title dot-ellipsis dot-resize-update">关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养</a>
+                            <div class="bar-b">
+                                <div class="item origin">
+                                    <div class="abs-con">
+                                        <a href="javascript:void (0);" class="text am-text-truncate">安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利安利</a>
+                                        <!--<span class="date">2016-12-14</span>-->
+                                    </div>
+                                </div>
+                                <div class="item am-text-right">
+                                    <!--<button type="button" class="btn-generalize">-->
+                                    <!--<i class="svg-icon icon-18"></i>-->
+                                    <!--<span>插入名片</span>-->
+                                    <!--</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:void (0);" class="thumbnail" style="background-image: url('images/thumbnail/info_list_2.png')">
+                            <img src="images/thumbnail/info_list_2.png">
+                            <div class="tag red am-text-truncate">公告</div>
+                        </a>
+                        <div class="text-con">
+                            <a href="javascript:void (0);" class="desc title dot-ellipsis dot-resize-update">Get微营销“黑科技”，朋友圈粉丝说涨就涨Get微营销“黑科技”，朋友圈粉丝说涨就涨</a>
+                            <div class="bar-b">
+                                <div class="item origin">
+                                    <!--<div class="abs-con">-->
+                                        <!--<a href="javascript:void (0);" class="text am-text-truncate">安利</a>-->
+                                        <!--<span class="date">2016-12-14</span>-->
+                                    <!--</div>-->
+                                </div>
+                                <div class="item">
+                                    <a href="javascript:void (0);" class="btn-generalize">
+                                        <i class="svg-icon icon-18"></i>
+                                        <span>插入名片</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="javascript:void (0);" class="thumbnail" style="background-image: url('images/thumbnail/info_list_3.png')">
+                            <img src="images/thumbnail/info_list_3.png">
+                            <!--<div class="tag blue am-text-truncate">公告</div>-->
+                        </a>
+                        <div class="text-con">
+                            <a href="javascript:void (0);" class="desc title dot-ellipsis dot-resize-update">听说用过这些神器的人，现在都不用过光棍节了听说用过这些神器的人，现在都不用过光棍节了听说用过这些神器的人，现在都不用过光棍节了听说用过这些神器的人，现在都不用过光棍节了</a>
+                            <div class="bar-b">
+                                <div class="item origin">
+                                    <div class="abs-con">
+                                        <a href="javascript:void (0);" class="text am-text-truncate">营销推广</a>
+                                        <!--<span class="date">2016-12-14</span>-->
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <a href="javascript:void (0);" class="btn-generalize">
+                                        <i class="svg-icon icon-18"></i>
+                                        <span>插入名片</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <button type="button" class="btn-w">
+                    <i class="svg-icon icon-14"></i>
+                    <span>换一批</span>
+                </button>
+            </div>
+        </div>
+        <div class="content-group">
+            <h3 class="title-left am-margin-top">热词</h3>
+            <div class="content-box">
+                <div class="hot-keys_index am-text-center">
+                    <a href="search_result3.html">创办人金句</a>
+                    <a href="search_result3.html">经销商</a>
+                    <a href="search_result3.html">补钙</a>
+                    <a href="search_result3.html">美白</a>
+                    <a href="search_result3.html">免疫力</a>
+                    <a href="search_result3.html">净水器</a>
+                    <a href="search_result3.html">蛋白粉</a>
+                    <a href="search_result3.html">移动工作室</a>
+                    <a href="search_result3.html">健络精华</a>
+                    <a href="search_result3.html">唇膏</a>
+                    <a href="search_result3.html">钙镁片</a>
+                    <a href="search_result3.html">营养</a>
+                    <a href="search_result3.html">型体乐</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<footer>版权为安利(中国)日用品有限公司所有<br>未经许可不得转载或链接  粤ICP备05013154号</footer>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/lib.min.js"></script>
+<script src="scripts/main.min.js"></script>
+
+</body>
+</html>
