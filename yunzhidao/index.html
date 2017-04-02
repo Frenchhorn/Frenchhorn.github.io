@@ -8,31 +8,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Cache-Control" content="max-age=2592000">
     <meta name="renderer" content="webkit">
-
     <meta name="format-detection" content="telephone=no">
-
     <meta http-equiv="Content-Language" content="zh-cn">
-
-    <!--<link rel="icon" type="image/png" href="assets/i/favicon.png">-->
-
-    <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <!--<link rel="icon" sizes="192x192" href="assets/i/app-icon72x72@2x.png">-->
-
-    <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Amaze UI">
-    <!--<link rel="apple-touch-icon-precomposed" href="assets/i/app-icon72x72@2x.png">-->
-
-    <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <!--<meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">-->
     <meta name="msapplication-TileColor" content="#0e90d2">
 
     <title>安利云知道</title>
     <link rel="stylesheet" href="styles/style.min.css">
-    <script src="scripts/jquery.min.js"></script>
     <script src="json/index.js"></script>
+    <script>
+        var isAbo = localStorage.isAbo;
+        var isPromotion = localStorage.isPromotion;
+        var isWechat = window.wx ? true : false;
+    </script>
 </head>
 <body>
 <div class="main-con">
@@ -54,30 +45,30 @@
             </div>
         </div>
     </div>
-    <header class="index" style="background-image: url('images/bg_index.jpg')">
+    <header class="index" id="background">
+        <script>document.getElementById('background').style.backgroundImage  = jsonFile.index.background ? jsonFile.index.background : '';</script>
         <div class="bg-b"></div>
         <div class="bar-t">
-            <button type="button" class="btn-user"></button>
+            <button type="button" class="btn-user" onclick="location.href='login.html'"></button>
         </div>
         <div class="search-bar am-text-center">
             <div class="option-group">
                 <label class="radio-label">
-                    <input class="radio" type="radio" name="search-options" value="全部" id="option1" checked="checked"><span class="text">全部</span>
+                    <input class="radio" type="radio" name="search-options" value="全部" checked="checked"><span class="text">全部</span>
                 </label>
                 <label class="radio-label">
-                    <input class="radio" type="radio" name="search-options" value="视频" id="option2"><span class="text">视频</span>
+                    <input class="radio" type="radio" name="search-options" value="视频"><span class="text">视频</span>
                 </label>
                 <label class="radio-label">
-                    <input class="radio" type="radio" name="search-options" value="图片" id="option3"><span class="text">图片</span>
+                    <input class="radio" type="radio" name="search-options" value="图片"><span class="text">图片</span>
                 </label>
             </div>
-            <div class="am-input-group am-padding-left am-padding-right" onclick="location.href='search_input.html'">
+            <div class="am-input-group am-padding-left am-padding-right" onclick="location.href='searchInput.html'">
                 <span class="am-input-group-btn">
                     <button class="search-btn am-btn am-btn-default" type="button">
                         <i class="svg-icon icon-17"></i>
                     </button>
                 </span>
-                <!--<input  type="text" class="search-input am-form-field" placeholder="请输入搜索名称">-->
                 <div class="search-input am-form-field">请输入搜索名称</div>
             </div>
         </div>
@@ -97,96 +88,93 @@
                     <div class="am-tabs-bd">
                         <div class="am-tab-panel am-fade am-in am-active" id="tab1">
                             <ul class="btn-list am-avg-sm-4">
-                                <li><a href="hot_category.html"><i class="svg-icon icon-1"></i><span class="text am-text-truncate">纽崔莱</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-2"></i><span class="text am-text-truncate">雅姿</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-3"></i><span class="text am-text-truncate">个人护理</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-4"></i><span class="text am-text-truncate">家居科技</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-19"></i><span class="text am-text-truncate">海外购</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-20"></i><span class="text am-text-truncate">美好生活</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-21"></i><span class="text am-text-truncate">走近安利</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-22"></i><span class="text am-text-truncate">媒体看安利</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-23"></i><span class="text am-text-truncate">事业机会</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-24"></i><span class="text am-text-truncate">反击谣言</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-33"></i><span class="text am-text-truncate">企业文化</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-34"></i><span class="text am-text-truncate">九宫格</span></a></li>
+                                <script>
+                                    (function(){
+                                        var news = jsonFile.index.category.news || {};
+                                        if (news.length === 0) {return false;}
+                                        var html = '';
+                                        for (var i=0; i<news.length; i++){
+                                            html += '<li><a href="javascript:void(0);"><i class="svg-icon ' + news[i].image + '"></i>' +
+                                                    '<span class="text am-text-truncate">' + news[i].name + '</span></a></li>';
+                                        }
+                                        if (news.length%4 !== 0){
+                                            for (var i=news.length%4; i<4; i++){
+                                                html += '<li></li>';
+                                            }
+                                        }
+                                        document.write(html);
+                                    })();
+                                </script>
                             </ul>
                         </div>
                         <div class="am-tab-panel am-fade" id="tab2">
                             <ul class="btn-list am-avg-sm-4">
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-26"></i><span class="text am-text-truncate">健康</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-27"></i><span class="text am-text-truncate">美丽</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-28"></i><span class="text am-text-truncate">生活</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-29"></i><span class="text am-text-truncate">事业</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-30"></i><span class="text am-text-truncate">Amway</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-35"></i><span class="text am-text-truncate">企业文化</span></a></li>
-                                <li></li>
-                                <li></li>
+                                <script>
+                                    (function(){
+                                        var video = jsonFile.index.category.video || {};
+                                        if (video.length === 0) {return false;}
+                                        var html = '';
+                                        for (var i=0; i<video.length; i++){
+                                            html += '<li><a href="javascript:void(0);"><i class="svg-icon ' + video[i].image + '"></i>' +
+                                                    '<span class="text am-text-truncate">' + video[i].name + '</span></a></li>';
+                                        }
+                                        if (video.length%4 !== 0){
+                                            for (var i=video.length%4; i<4; i++){
+                                                html += '<li></li>';
+                                            }
+                                        }
+                                        document.write(html);
+                                    })();
+                                </script>
                             </ul>
                         </div>
                         <div class="am-tab-panel am-fade" id="tab3">
                             <ul class="btn-list-img am-avg-sm-3">
-                                <li>
-                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_4.png')">
-                                        <span class="text am-text-truncate bgc dark-green">纽崔莱</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_7.png')">
-                                        <span class="text am-text-truncate bgc brown">雅姿</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_2.png')">
-                                        <span class="text am-text-truncate bgc blue">家居科技</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_3.png')">
-                                        <span class="text am-text-truncate bgc green">优生活</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_5.png')">
-                                        <span class="text am-text-truncate bgc light-blue">个人护理</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_1.png')">
-                                        <span class="text am-text-truncate bgc red">海外购</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="thumbnail" href="search_result_img2.html" style="background-image: url('images/thumbnail/btn_list_6.png')">
-                                        <span class="text am-text-truncate bgc dark-blue">安利产品单张</span>
-                                    </a>
-                                </li>
+                                <script>
+                                    (function(){
+                                        var image = jsonFile.index.category.image || {};
+                                        if (image.length === 0) {return false;}
+                                        var html = '';
+                                        for (var i=0; i<image.length; i++){
+                                            html += '<li><a class="thumbnail" href="javascript:void(0);" style="background-image: url(\'' + image[i].image + '\')">' +
+                                                    '<span class="text am-text-truncate bgc ' + image[i].color + '">' + image[i].name + '</span></a></li>';
+                                        }
+                                        document.write(html);
+                                    })();
+                                </script>
                             </ul>
                         </div>
                         <div class="am-tab-panel am-fade" id="tab4">
                             <ul class="btn-list am-avg-sm-4">
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-1"></i><span class="text am-text-truncate">纽崔莱</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-2"></i><span class="text am-text-truncate">雅姿</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-4"></i><span class="text am-text-truncate">家居科技</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-5"></i><span class="text am-text-truncate">家居护理</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-3"></i><span class="text am-text-truncate">个人护理</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-36"></i><span class="text am-text-truncate">数字化</span></a></li>
-
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-6"></i><span class="text am-text-truncate">业务技能</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-7"></i><span class="text am-text-truncate">制度和守则</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-8"></i><span class="text am-text-truncate">礼仪修养</span></a></li>
-                                <li><a href="javascript:void(0);"><i class="svg-icon icon-11"></i><span class="text am-text-truncate">走近安利</span></a></li>
-                                <li></li>
-                                <li></li>
-
+                                <script>
+                                    (function(){
+                                        var training = jsonFile.index.category.training || {};
+                                        if (training.length === 0) {return false;}
+                                        var html = '';
+                                        for (var i=0; i<training.length; i++){
+                                            html += '<li><a href="javascript:void(0);"><i class="svg-icon ' + training[i].image + '"></i>' +
+                                                    '<span class="text am-text-truncate">' + training[i].name + '</span></a></li>';
+                                        }
+                                        if (training.length%4 !== 0){
+                                            for (var i=training.length%4; i<4; i++){
+                                                html += '<li></li>';
+                                            }
+                                        }
+                                        document.write(html);
+                                    })();
+                                </script>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn-w am-margin-top-xs">
+            <button type="button" id="contentButton" class="btn-w am-margin-top-xs" style="display: none">
                 <i class="svg-icon icon-13"></i>
                 <span>推广助手</span>
             </button>
+            <script>
+                if (!!isPromotion){document.getElementById('contentButton').style.display = 'block';}
+            </script>
         </div>
         <div class="content-group">
             <h3 class="title-left am-margin-top">今日更新</h3>
@@ -272,28 +260,27 @@
             <h3 class="title-left am-margin-top">热词</h3>
             <div class="content-box">
                 <div class="hot-keys_index am-text-center">
-<!--                <a href="search_result3.html">创办人金句</a>-->
                     <script>
                         (function() {
-                            var hotwordHtml;
+                            var html = '';
                             var hotword = jsonFile.index.hotword || {};
+                            if (hotword.length === 0) {return false;}
+                            document.getElementById('hotword').style.display = 'block';
                             for (var i = 0; i < hotword.length; i++) {
-                                hotwordHtml = '<a href="';
+                                html += '<a href="';
                                 if (!!hotword[i].redirectLink) {
-                                    hotwordHtml += hotword[i].redirectLink;
+                                    html += hotword[i].redirectLink;
                                 } else if (hotword[i].tags.length > 0) {
-                                    hotwordHtml += "searchResults.html?category="+(hotword[i].displayWord || hotword[i].searchWord)+"&categoryType=hotWord";
+                                    html += "searchResults.html?category="+(hotword[i].displayWord || hotword[i].searchWord)+"&categoryType=hotWord";
                                 } else {
-                                    hotwordHtml += "searchResults.html?keyword="+(hotword[i].searchWord || hotword[i].displayWord)+"&searchType=all";                                    
+                                    html += "searchResults.html?keyword="+(hotword[i].searchWord || hotword[i].displayWord)+"&searchType=all";                                    
                                 }
-                                hotwordHtml += '">';
-                                hotwordHtml += hotword[i].displayWord || hotword[i].searchWord;
-                                hotwordHtml += '</a>';
-                                document.write(hotwordHtml);
+                                html += '">';
+                                html += hotword[i].displayWord || hotword[i].searchWord;
+                                html += '</a>';
+                                
                             }
-                            if (hotword.length > 0) {
-                                document.getElementById('hotword').style.display = 'block';
-                            }
+                            document.write(html);
                         })();
                     </script>
                 </div>
@@ -302,6 +289,7 @@
     </div>
 </div>
 <footer>版权为安利(中国)日用品有限公司所有<br>未经许可不得转载或链接  粤ICP备05013154号</footer>
+<script src="scripts/jquery.min.js"></script>
 <script src="scripts/lib.min.js"></script>
 <script src="scripts/main.min.js"></script>
 
