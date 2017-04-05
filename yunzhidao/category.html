@@ -1,0 +1,178 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="max-age=2592000">
+    <meta name="renderer" content="webkit">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="Content-Language" content="zh-cn">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+
+    <title>安利云知道</title>
+</head>
+
+<body>
+    <script type="text/javascript">
+        // redirect to homepage if no category is chosen
+        var categoryWithStructure = '<%=categoryWithStructure %>';
+        if (!categoryWithStructure) {
+            window.location.href = 'index.html';
+        }
+
+        $(document).ready(function() {
+            var pageTitle = '"' + $('header span').text() + '"相关资讯';
+            $('title').text(pageTitle);
+        });
+    </script>
+
+    <div class="main-con" id="categoryPage">
+        <div class="go-top">
+            <div class="inner-con">
+                <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
+                    <a href="#top" title="回到顶部">
+                        <span class="am-gotop-title">回到顶部</span>
+                        <i class="am-gotop-icon am-icon-chevron-up"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <header class="common search">
+            <div class="bar-t">
+                <a class="btn-home" href="index.html">
+                    <i class="svg-icon icon-16"></i>
+                </a>
+                <div class="text-con am-text-center">
+                    <span class="title am-text-truncate"><%=categoryTitle %></span>
+                </div>
+            </div>
+        </header>
+        <div class="content-body common">
+            <div class="content-group am-margin-top-sm">
+                <ul class="category-list am-avg-sm-3 am-avg-md-5">
+                <%
+                    if (null != categoryPage) {
+                        Iterator<Page> categoryIter = categoryPage.listChildren();
+                        if (null != categoryIter) {
+                            while (categoryIter.hasNext()) {
+                                Page category = categoryIter.next();
+                                ValueMap categoryProperties = category.getProperties();
+                                String redirectLink = categoryProperties.get("redirectLink", "");
+                                String categoryName = categoryWithStructure.replace("/", ".") + category.getName();
+                                Iterator<Page> items = category.listChildren();
+                                hasChild = (null != items && items.hasNext()) ? true : false;
+                %>
+                    <li>
+                        <a class="am-text-middle" href="javascript:void(0)" onclick="amwaysearch.components.search.searchByCategory('<%=categoryType %>', '<%=categoryName %>', '<%=parentCatagoryTitle + "-" + category.getTitle() %>', <%=hasChild %>, '<%=redirectLink %>')">
+                            <span class="text"><%=category.getTitle() %></span>
+                        </a>
+                    </li>
+                <%
+                            }
+                        }
+                    }
+                %>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript">
+    var yunzhidao = {
+        config: {
+            isRunMode: <%=isRunMode %>,
+            isWeixin: /MicroMessenger/i.test(window.navigator.userAgent)
+        },
+        authenticationInfo: {
+            urlForWxToken: '<%=wechatAuthorizeUrl %>',
+            urlForWxUserinfo: '<%=configService.getWechatFrameworkGetUserinfoUrl() %>',
+            wxUserType: '<%=userType%>',
+            adaNum: '',
+            isAboUser: false
+        },
+        aboInfo: {
+            aboId: '',
+            errorCode: ''
+        },
+        searchInfo: {
+            pageId: '<%=pageId %>',
+            urls: {
+                solrServerPath: '<%=configService.getSolrUrl() %>',
+                searchResultPath: ''
+            },
+            list: {
+                hotList: <%=hotTagList %>,
+                contentTags: <%=contentTagList %>
+            },
+            pageSetting: {
+                maxTitle: <%=maxTitle %>,
+                maxDescription: <%=maxDescription %>,
+                maxStrippedContent: <%=maxStrippedContent %>
+            },
+            labels: {
+                promotionAssistant: '<%= promotionAssistantLabel %>'
+            }
+        },
+        domainInfo: {
+            aaWorkShopDomain: '<%=configService.getAAworkshopDomain() %>',
+            acfDomain: '<%=configService.getAcfDomain() %>',
+            contenthubDomain: '<%=configService.getContenthubDomain() %>',
+            informationDomain: '<%=configService.getInformationDomain() %>',
+            mobileDomain: '<%=configService.getMobileDomain() %>',
+            officialDomain: '<%=configService.getOfficialDomain() %>'
+        },
+        searchResultInfo: {
+            searchType: '',
+            category: '',
+            categoryType: '',
+            categoryTitle: '',
+            videoTagName: '',
+            trainingTagName: '',
+            searchPath: '',
+            categoryTags: [],
+            hotWordList: []
+        },
+        customInfo: {
+            maxArticleNumPerPage: 6,
+            imageInfo: []
+        },
+        productInfo: {
+            dataXML: {}
+        },
+        analytics: {
+            category: {news:'资讯', image:'图片', video:'视频', training:'培训'},
+            hotWordSource: {indexPage:'首页', searchInputPage:'搜索页'},
+            contentTagSource: {dailyUpdate:'今日更新', searchResultPage:'搜索结果及自选内容页', customResultPage:'搜索结果及自选内容页', contentPage:'文章详情页'}
+        }
+    };
+
+    if (yunzhidao.config.isRunMode && !yunzhidao.config.isWeixin) {
+        var adaNum = '<%=adaNum %>';
+        if (adaNum) {
+            yunzhidao.authenticationInfo.adaNum = adaNum;
+            yunzhidao.authenticationInfo.isAboUser = true;
+            amwaysearch.components.searchresult.getAboInfoAndCallback();
+        }
+    }
+    window.yunzhidao = yunzhidao;
+
+    $(document).ready(function() {
+        if (!yunzhidao.config.isWeixin) {
+            amwaysearch.components.search.addQrCodeSection();
+        }
+    });
+</script>
+
+<footer>
+    版权为安利(中国)日用品有限公司所有 <br> 未经许可不得转载或链接  粤ICP备05013154号
+</footer>
+</html>

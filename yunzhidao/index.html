@@ -18,23 +18,18 @@
 
     <title>安利云知道</title>
     <link rel="stylesheet" href="styles/style.min.css">
+    <script src="scripts/vendor/jquery.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <script src="scripts/search.js"></script>
+    <script src="scripts/landing.js"></script>
     <script src="json/index.js"></script>
     <script>
         var isAbo = localStorage.isAbo;
         var isPromotion = localStorage.isPromotion;
-        var isWechat = window.wx ? true : false;
     </script>
 </head>
 <body>
-<div class="main-con">
-    <div class="qr_code_pc_outer">
-        <div class="qr_code_pc_inner">
-            <div class="qr_code_pc">
-                <img id="js_pc_qr_code_img" class="qr_code_pc_img" src="images/qrcode.jpg">
-                <p>关注安利云服务<br>产品服务全知道</p>
-            </div>
-        </div>
-    </div>
+<div class="main-con" id='landingPage'>
     <div class="go-top">
         <div class="inner-con">
             <div data-am-widget="gotop" class="am-gotop am-gotop-fixed">
@@ -49,21 +44,21 @@
         <script>document.getElementById('background').style.backgroundImage  = jsonFile.index.background ? jsonFile.index.background : '';</script>
         <div class="bg-b"></div>
         <div class="bar-t">
-            <button type="button" class="btn-user" onclick="location.href='login.html'"></button>
+            <button type="button" class="btn-user" style="display:none"></button>
         </div>
         <div class="search-bar am-text-center">
             <div class="option-group">
                 <label class="radio-label">
-                    <input class="radio" type="radio" name="search-options" value="全部" checked="checked"><span class="text">全部</span>
+                    <input class="radio" type="radio" name="searchType" value="all" id="option1" checked="checked"><span class="text">全部</span>
                 </label>
                 <label class="radio-label">
-                    <input class="radio" type="radio" name="search-options" value="视频"><span class="text">视频</span>
+                    <input class="radio" type="radio" name="searchType" value="video" id="option2"><span class="text">视频</span>
                 </label>
                 <label class="radio-label">
-                    <input class="radio" type="radio" name="search-options" value="图片"><span class="text">图片</span>
+                    <input class="radio" type="radio" name="searchType" value="image" id="option3"><span class="text">图片</span>
                 </label>
             </div>
-            <div class="am-input-group am-padding-left am-padding-right" onclick="location.href='searchInput.html'">
+            <div id="searchBar" class="am-input-group am-padding-left am-padding-right">
                 <span class="am-input-group-btn">
                     <button class="search-btn am-btn am-btn-default" type="button">
                         <i class="svg-icon icon-17"></i>
@@ -73,20 +68,21 @@
             </div>
         </div>
     </header>
+
     <div class="content-body index">
         <div class="content-group">
             <h3 class="title-left am-margin-top">热门分类</h3>
             <div class="content-box">
                 <div class="am-tabs" data-am-tabs>
-                    <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
-                        <li class="am-active"><a href="#tab1">资讯</a></li>
-                        <li><a href="#tab2">视频</a></li>
-                        <li><a href="#tab3">图片</a></li>
-                        <li><a href="#tab4">培训</a></li>
+                    <ul id="categoryType" class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+                        <li categoryType="news" class="am-active"><a href="#news">资讯</a></li>
+                        <li categoryType="video"><a href="#video">视频</a></li>
+                        <li categoryType="image"><a href="#image">图片</a></li>
+                        <li categoryType="training" style="display:none"><a href="#training">培训</a></li>
                     </ul>
 
                     <div class="am-tabs-bd">
-                        <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                        <div class="am-tab-panel am-fade am-in am-active" id="news">
                             <ul class="btn-list am-avg-sm-4">
                                 <script>
                                     (function(){
@@ -94,8 +90,12 @@
                                         if (news.length === 0) {return false;}
                                         var html = '';
                                         for (var i=0; i<news.length; i++){
-                                            html += '<li><a href="javascript:void(0);"><i class="svg-icon ' + news[i].image + '"></i>' +
-                                                    '<span class="text am-text-truncate">' + news[i].name + '</span></a></li>';
+                                            html += '<li>' +
+                                                        '<a href="javascript:void(0);">' +
+                                                            '<i class="svg-icon ' + news[i].image + '"></i>' +
+                                                            '<span class="text am-text-truncate">' + news[i].name + '</span>' +
+                                                        '</a>' +
+                                                    '</li>';
                                         }
                                         if (news.length%4 !== 0){
                                             for (var i=news.length%4; i<4; i++){
@@ -107,7 +107,8 @@
                                 </script>
                             </ul>
                         </div>
-                        <div class="am-tab-panel am-fade" id="tab2">
+
+                        <div class="am-tab-panel am-fade" id="video">
                             <ul class="btn-list am-avg-sm-4">
                                 <script>
                                     (function(){
@@ -115,8 +116,12 @@
                                         if (video.length === 0) {return false;}
                                         var html = '';
                                         for (var i=0; i<video.length; i++){
-                                            html += '<li><a href="javascript:void(0);"><i class="svg-icon ' + video[i].image + '"></i>' +
-                                                    '<span class="text am-text-truncate">' + video[i].name + '</span></a></li>';
+                                            html += '<li>' +
+                                                        '<a href="javascript:void(0);">' +
+                                                            '<i class="svg-icon ' + video[i].image + '"></i>' +
+                                                            '<span class="text am-text-truncate">' + video[i].name + '</span>' +
+                                                        '</a>' +
+                                                    '</li>';
                                         }
                                         if (video.length%4 !== 0){
                                             for (var i=video.length%4; i<4; i++){
@@ -128,7 +133,8 @@
                                 </script>
                             </ul>
                         </div>
-                        <div class="am-tab-panel am-fade" id="tab3">
+
+                        <div class="am-tab-panel am-fade" id="image">
                             <ul class="btn-list-img am-avg-sm-3">
                                 <script>
                                     (function(){
@@ -136,15 +142,19 @@
                                         if (image.length === 0) {return false;}
                                         var html = '';
                                         for (var i=0; i<image.length; i++){
-                                            html += '<li><a class="thumbnail" href="javascript:void(0);" style="background-image: url(\'' + image[i].image + '\')">' +
-                                                    '<span class="text am-text-truncate bgc ' + image[i].color + '">' + image[i].name + '</span></a></li>';
+                                            html += '<li>' +
+                                                        '<a class="thumbnail" href="javascript:void(0);" style="background-image: url(\'' + image[i].image + '\')">' +
+                                                            '<span class="text am-text-truncate bgc ' + image[i].color + '">' + image[i].name + '</span>' +
+                                                        '</a>' +
+                                                    '</li>';
                                         }
                                         document.write(html);
                                     })();
                                 </script>
                             </ul>
                         </div>
-                        <div class="am-tab-panel am-fade" id="tab4">
+
+                        <div class="am-tab-panel am-fade" id="training">
                             <ul class="btn-list am-avg-sm-4">
                                 <script>
                                     (function(){
@@ -152,8 +162,12 @@
                                         if (training.length === 0) {return false;}
                                         var html = '';
                                         for (var i=0; i<training.length; i++){
-                                            html += '<li><a href="javascript:void(0);"><i class="svg-icon ' + training[i].image + '"></i>' +
-                                                    '<span class="text am-text-truncate">' + training[i].name + '</span></a></li>';
+                                            html += '<li>' +
+                                                        '<a href="javascript:void(0);">' +
+                                                            '<i class="svg-icon ' + training[i].image + '"></i>' +
+                                                            '<span class="text am-text-truncate">' + training[i].name + '</span>' +
+                                                        '</a>' +
+                                                    '</li>';
                                         }
                                         if (training.length%4 !== 0){
                                             for (var i=training.length%4; i<4; i++){
@@ -168,117 +182,49 @@
                     </div>
                 </div>
             </div>
-            <button type="button" id="contentButton" class="btn-w am-margin-top-xs" style="display: none">
+            <button id="chButton" type="button" class="btn-w am-margin-top-xs" style="display:none">
                 <i class="svg-icon icon-13"></i>
                 <span>推广助手</span>
             </button>
-            <script>
-                if (!!isPromotion){document.getElementById('contentButton').style.display = 'block';}
-            </script>
         </div>
-        <div class="content-group">
-            <h3 class="title-left am-margin-top">今日更新</h3>
+
+        <div id="dailyUpdate" class="content-group">
+            <script>
+                document.write('<h3 class="title-left am-margin-top">' + jsonFile.index.dailyUpdate['title'] + '</h3>')
+            </script>
             <div class="content-box">
                 <ul class="info-list">
-                    <li>
-                        <a href="javascript:void (0);" class="thumbnail" style="background-image: url('images/thumbnail/info_list_1.png')">
-                            <img src="images/thumbnail/info_list_1.png">
-                            <div class="tag blue am-text-truncate">公告</div>
-                        </a>
-                        <div class="text-con">
-                            <a href="javascript:void (0);" class="desc title dot-ellipsis dot-resize-update">关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养关于安利产品的回应——纽崔莱营养</a>
-                            <div class="bar-b">
-                                <div class="item origin">
-                                    <div class="abs-con">
-                                        <a href="javascript:void (0);" class="text am-text-truncate">安利安利安利安利利</a>
-                                        <!--<span class="date">2016-12-14</span>-->
-                                    </div>
-                                </div>
-                                <div class="item am-text-right">
-                                    <!--<button type="button" class="btn-generalize">-->
-                                    <!--<i class="svg-icon icon-18"></i>-->
-                                    <!--<span>插入名片</span>-->
-                                    <!--</button>-->
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="javascript:void (0);" class="thumbnail" style="background-image: url('images/thumbnail/info_list_2.png')">
-                            <img src="images/thumbnail/info_list_2.png">
-                            <div class="tag red am-text-truncate">公告</div>
-                        </a>
-                        <div class="text-con">
-                            <a href="javascript:void (0);" class="desc title dot-ellipsis dot-resize-update">Get微营销“黑科技”，朋友圈粉丝说涨就涨Get微营销“黑科技”，朋友圈粉丝说涨就涨</a>
-                            <div class="bar-b">
-                                <div class="item origin">
-                                    <!--<div class="abs-con">-->
-                                        <!--<a href="javascript:void (0);" class="text am-text-truncate">安利</a>-->
-                                        <!--<span class="date">2016-12-14</span>-->
-                                    <!--</div>-->
-                                </div>
-                                <div class="item">
-                                    <a href="javascript:void (0);" class="btn-generalize">
-                                        <i class="svg-icon icon-18"></i>
-                                        <span>插入名片</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="javascript:void (0);" class="thumbnail" style="background-image: url('images/thumbnail/info_list_3.png')">
-                            <img src="images/thumbnail/info_list_3.png">
-                            <!--<div class="tag blue am-text-truncate">公告</div>-->
-                        </a>
-                        <div class="text-con">
-                            <a href="javascript:void (0);" class="desc title dot-ellipsis dot-resize-update">听说用过这些神器的人，现在都不用过光棍节了听说用过这些神器的人，现在都不用过光棍节了听说用过这些神器的人，现在都不用过光棍节了听说用过这些神器的人，现在都不用过光棍节了</a>
-                            <div class="bar-b">
-                                <div class="item origin">
-                                    <div class="abs-con">
-                                        <a href="javascript:void (0);" class="text am-text-truncate">营销推广</a>
-                                        <!--<span class="date">2016-12-14</span>-->
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <a href="javascript:void (0);" class="btn-generalize">
-                                        <i class="svg-icon icon-18"></i>
-                                        <span>插入名片</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
-                <button type="button" class="btn-w">
+                <button id="changeDailyUpdate" type="button" class="btn-w">
                     <i class="svg-icon icon-14"></i>
-                    <span>换一批</span>
+                    <script>document.write('<span>' + jsonFile.index.dailyUpdate['buttonTitle'] + '</span>')</script>
                 </button>
             </div>
         </div>
-        <div class="content-group" id="hotword" style="display:none">
+
+        <div class="content-group" id="hotword">
             <h3 class="title-left am-margin-top">热词</h3>
             <div class="content-box">
                 <div class="hot-keys_index am-text-center">
                     <script>
                         (function() {
-                            var html = '';
                             var hotword = jsonFile.index.hotword || {};
-                            if (hotword.length === 0) {return false;}
-                            document.getElementById('hotword').style.display = 'block';
+                            if (hotword.length === 0) {
+                                document.getElementById('hotword').style.display = 'none';
+                                return false;
+                            }
+
+                            var html = '', href = '';
                             for (var i = 0; i < hotword.length; i++) {
-                                html += '<a href="';
                                 if (!!hotword[i].redirectLink) {
-                                    html += hotword[i].redirectLink;
+                                    href = hotword[i].redirectLink;
                                 } else if (hotword[i].tags.length > 0) {
-                                    html += "searchResults.html?category="+(hotword[i].displayWord || hotword[i].searchWord)+"&categoryType=hotWord";
+                                    href = "searchResults.html?category="+(hotword[i].displayWord || hotword[i].searchWord)+"&categoryType=hotWord";
                                 } else {
-                                    html += "searchResults.html?keyword="+(hotword[i].searchWord || hotword[i].displayWord)+"&searchType=all";                                    
+                                    href = "searchResults.html?keyword="+(hotword[i].searchWord || hotword[i].displayWord)+"&searchType=all";                                    
                                 }
-                                html += '">';
-                                html += hotword[i].displayWord || hotword[i].searchWord;
-                                html += '</a>';
-                                
+
+                                html += '<a href="' + href + '">' + (hotword[i].displayWord || hotword[i].searchWord) + '</a>';
                             }
                             document.write(html);
                         })();
@@ -288,10 +234,36 @@
         </div>
     </div>
 </div>
-<footer>版权为安利(中国)日用品有限公司所有<br>未经许可不得转载或链接  粤ICP备05013154号</footer>
-<script src="scripts/jquery.min.js"></script>
-<script src="scripts/lib.min.js"></script>
-<script src="scripts/main.min.js"></script>
-
 </body>
+
+<script>
+    //Login Button
+    document.getElementsByClassName('btn-user')[0].onclick = function() {
+        if (!isAbo && !isPromotion) {
+            location.href = 'login.html';
+        } else {
+            location.href = 'logout.html';
+        }
+    }
+
+    var articlesArray = jsonFile.index.dailyUpdate['articles'];
+    $(document).ready(function() {
+        if (yunzhidao.config.isRunMode && yunzhidao.config.isWeixin) {
+            amwaysearch.components.wechatInterface.initToken(getAboInfo);
+        } else {
+            initModule();
+        }
+    });
+
+    var initModule = function() {
+        amwaysearch.components.landing.initDailyUpdate(articlesArray);
+        amwaysearch.components.landing.displayButtonAndTrain();
+    };
+
+    var getAboInfo = function() {
+        amwaysearch.components.searchresult.getAboInfoAndCallback(initModule);
+    };
+</script>
+<script src="scripts/vendor/lib.min.js"></script>
+<script src="scripts/vendor/main.min.js"></script>
 </html>

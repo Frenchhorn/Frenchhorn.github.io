@@ -1,10 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
 <title>安利（中国）认证中心</title>
-<link href="./login/m_login.css" rel="stylesheet" type="text/css">
+<link href="./login/login.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -28,4 +28,14 @@
     
     <p class="copy_right">版权为安利（中国）日用品有限公司所有未经许可不得转载或链接，2006年粤ICP备05013154</p>
 </body>
+<script>
+    document.getElementById('btnLogin').onclick = function(){
+        localStorage.isAbo = true;
+        localStorage.isPromotion = true;
+        location.href = 'index.html';
+    }
+    document.getElementById('btnCancel').onclick = function(){
+        location.href = 'index.html';
+    }
+</script>
 </html>
