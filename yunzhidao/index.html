@@ -158,6 +158,7 @@
                             <ul class="btn-list am-avg-sm-4">
                                 <script>
                                     (function(){
+                                        if (!isAbo) {return false;}
                                         var training = jsonFile.index.category.training || {};
                                         if (training.length === 0) {return false;}
                                         var html = '';
@@ -246,24 +247,22 @@
         }
     }
 
+    if (!!isPromotion) {
+        let chButton = document.getElementById('chButton');
+        chButton.style.display = 'block';
+        chButton.onclick = function() {
+            window.location.href = window.yunzhidao.domainInfo.aaWorkShopDomain + '/content/china/accl/aaworkshop/assistant.html';
+        }
+    }
+
     var articlesArray = jsonFile.index.dailyUpdate['articles'];
     $(document).ready(function() {
-        if (yunzhidao.config.isRunMode && yunzhidao.config.isWeixin) {
-            amwaysearch.components.wechatInterface.initToken(getAboInfo);
-        } else {
-            initModule();
-        }
-    });
-
-    var initModule = function() {
         amwaysearch.components.landing.initDailyUpdate(articlesArray);
         amwaysearch.components.landing.displayButtonAndTrain();
-    };
-
-    var getAboInfo = function() {
-        amwaysearch.components.searchresult.getAboInfoAndCallback(initModule);
-    };
+    });
 </script>
 <script src="scripts/vendor/lib.min.js"></script>
 <script src="scripts/vendor/main.min.js"></script>
+<script src="scripts/searchinput.js"></script>
+<script src="scripts/vendor/jquery.cookie.js"></script>
 </html>

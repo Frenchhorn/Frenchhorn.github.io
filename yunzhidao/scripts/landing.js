@@ -125,27 +125,12 @@ amwaysearch.components.landing = (function(window, $) {
     };
 
     var displayButtonAndTrain = function() {
-        if (yunzhidao.authenticationInfo.isAboUser) {
+        if (window.isAbo) {
             $('#categoryType [categorytype="training"]').show();
         } else {
             $('#categoryType [categorytype="training"]').remove();
             $('.am-tabs').tabs('refresh');
         }
-
-        if (yunzhidao.config.isWeixin && yunzhidao.authenticationInfo.isAboUser &&
-            yunzhidao.aboInfo.aboId) {
-            $('#chButton').show();
-        }
-    };
-
-    var ssoRedirection = function() {
-        var url;
-        if (yunzhidao.authenticationInfo.adaNum || $.cookie('CH_SSO_USER')) {
-            url = '/content/china/accl/ch_kit/sso/ssologout.html';
-        } else {
-            url = '/content/china/accl/ch_kit/sso/ssologin.html';
-        }
-        window.location.href = url;
     };
 
     var addLiElement = function() {
@@ -164,9 +149,6 @@ amwaysearch.components.landing = (function(window, $) {
     function start() {
         yunzhidao = window.yunzhidao || {};
         addLiElement();
-        if (!yunzhidao.config.isWeixin) {
-            $('.btn-user').show();
-        }
     }
 
     function bindEvents() {
@@ -174,13 +156,6 @@ amwaysearch.components.landing = (function(window, $) {
             amwaysearch.components.searchinput.setParamsAndValue();
             window.location.href = 'searchInput.html';
         });
-
-        $('#chButton').on('click', function() {
-            /* jshint maxlen: 140 */
-            window.location.href = window.yunzhidao.domainInfo.aaWorkShopDomain + '/content/china/accl/aaworkshop/assistant.html';
-        });
-
-        $('.btn-user').on('click', ssoRedirection);
     }
 
     return {
