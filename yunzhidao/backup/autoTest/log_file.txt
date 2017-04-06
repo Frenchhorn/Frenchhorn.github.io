@@ -1,0 +1,423 @@
+
+**********************************************************************
+2017-02-06 16:26:09
+**********************************************************************
+ERROR
+
+======================================================================
+ERROR: setUpClass (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 21, in setUpClass
+    config.getIndex(cls.driver)
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\config.py", line 32, in getIndex
+    password.send_keys(Keys.RETURN)
+NameError: name 'Keys' is not defined
+
+----------------------------------------------------------------------
+Ran 0 tests in 5.800s
+
+FAILED (errors=1)
+
+**********************************************************************
+2017-02-06 16:28:06
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ok
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 14.482s
+
+OK
+
+**********************************************************************
+2017-02-06 16:29:30
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ok
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 14.859s
+
+OK
+
+**********************************************************************
+2017-02-06 16:32:56
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ERROR
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+======================================================================
+ERROR: test_1 (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 26, in test_1
+    keyword = self.driver.find_element(Index.SEARCH_TEXT)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: 'using' must be a string
+  (Session info: chrome=55.0.2883.87)
+  (Driver info: chromedriver=2.25.426923 (0390b88869384d6eb0d5d09729679f934aab9eed),platform=Windows NT 10.0.10586 x86_64)
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 7.315s
+
+FAILED (errors=1)
+
+**********************************************************************
+2017-02-06 16:35:11
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ERROR
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+======================================================================
+ERROR: test_1 (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 28, in test_1
+    submit = self.driver.find_element(*Index.SEARCH_BUTTON)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=55.0.2883.87)
+  (Driver info: chromedriver=2.25.426923 (0390b88869384d6eb0d5d09729679f934aab9eed),platform=Windows NT 10.0.10586 x86_64)
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 7.340s
+
+FAILED (errors=1)
+
+**********************************************************************
+2017-02-06 16:38:50
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ERROR
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+======================================================================
+ERROR: test_1 (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 30, in test_1
+    submit = self.driver.find_element(By.CSS_SELECTOR, '[onclick=submitForm()]')
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.InvalidSelectorException: Message: invalid selector: An invalid or illegal selector was specified
+  (Session info: chrome=55.0.2883.87)
+  (Driver info: chromedriver=2.25.426923 (0390b88869384d6eb0d5d09729679f934aab9eed),platform=Windows NT 10.0.10586 x86_64)
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 7.293s
+
+FAILED (errors=1)
+
+**********************************************************************
+2017-02-06 16:48:31
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ok
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 9.269s
+
+OK
+
+**********************************************************************
+2017-02-06 16:53:32
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ERROR
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+======================================================================
+ERROR: test_1 (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 28, in test_1
+    keyword = self.driver.find_element(Index.SEARCH_TEXT)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.WebDriverException: Message: unknown error: 'using' must be a string
+  (Session info: chrome=55.0.2883.87)
+  (Driver info: chromedriver=2.25.426923 (0390b88869384d6eb0d5d09729679f934aab9eed),platform=Windows NT 10.0.10586 x86_64)
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 7.267s
+
+FAILED (errors=1)
+
+**********************************************************************
+2017-02-06 16:54:08
+**********************************************************************
+test_1 (__main__.YunzhidaoIndex) ... ok
+test_2 (__main__.YunzhidaoIndex) ... ok
+test_3 (__main__.YunzhidaoIndex) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 10.920s
+
+OK
+
+**********************************************************************
+2017-02-06 16:59:56
+**********************************************************************
+test_search_click (__main__.YunzhidaoIndex) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 11.312s
+
+OK
+
+**********************************************************************
+2017-02-06 17:13:29
+**********************************************************************
+test_search_click (__main__.YunzhidaoIndex) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 37.996s
+
+OK
+
+**********************************************************************
+2017-02-06 17:14:54
+**********************************************************************
+test_search_click (__main__.YunzhidaoIndex) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 8.589s
+
+OK
+
+**********************************************************************
+2017-02-07 10:13:16
+**********************************************************************
+test_1 (__main__.YunzhidaoCategory) ... ERROR
+test_search_click (__main__.YunzhidaoIndex) ... ERROR
+test_1 (__main__.YunzhidaoSearchResult) ... ERROR
+
+======================================================================
+ERROR: test_1 (__main__.YunzhidaoCategory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 41, in setUp
+    config.getIndex(cls.driver)
+NameError: name 'cls' is not defined
+
+======================================================================
+ERROR: test_search_click (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 19, in setUp
+    config.getIndex(cls.driver)
+NameError: name 'cls' is not defined
+
+======================================================================
+ERROR: test_1 (__main__.YunzhidaoSearchResult)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 60, in setUp
+    config.getIndex(cls.driver)
+NameError: name 'cls' is not defined
+
+----------------------------------------------------------------------
+Ran 3 tests in 17.702s
+
+FAILED (errors=3)
+
+**********************************************************************
+2017-02-07 10:15:17
+**********************************************************************
+test_1 (__main__.YunzhidaoCategory) ... ok
+test_search_click (__main__.YunzhidaoIndex) ... ok
+test_1 (__main__.YunzhidaoSearchResult) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 55.242s
+
+OK
+
+**********************************************************************
+2017-02-07 10:21:19
+**********************************************************************
+test_1 (__main__.YunzhidaoCategory) ... ok
+test_search_click (__main__.YunzhidaoIndex) ... ok
+test_1 (__main__.YunzhidaoSearchResult) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 27.643s
+
+OK
+
+**********************************************************************
+2017-02-07 10:22:39
+**********************************************************************
+test_1 (__main__.YunzhidaoCategory) ... ok
+test_search_click (__main__.YunzhidaoIndex) ... ERROR
+test_1 (__main__.YunzhidaoSearchResult) ... ok
+
+======================================================================
+ERROR: test_search_click (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\selenium\test\testcase.py", line 25, in test_search_click
+    keyword = self.driver.find_element(*Index.SEARCH_TEXT)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 752, in find_element
+    'value': value})['value']
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 236, in execute
+    self.error_handler.check_response(response)
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 192, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"id","selector":"autocomplete"}
+  (Session info: chrome=55.0.2883.87)
+  (Driver info: chromedriver=2.25.426923 (0390b88869384d6eb0d5d09729679f934aab9eed),platform=Windows NT 10.0.10586 x86_64)
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 17.225s
+
+FAILED (errors=1)
+
+**********************************************************************
+2017-02-07 10:37:36
+**********************************************************************
+test_1 (__main__.YunzhidaoCategory) ... ok
+test_search_click (__main__.YunzhidaoIndex) ... ok
+test_1 (__main__.YunzhidaoSearchResult) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 40.805s
+
+OK
+
+**********************************************************************
+2017-02-20 14:42:28
+**********************************************************************
+test_1 (__main__.YunzhidaoCategory) ... ok
+test_search_button (__main__.YunzhidaoIndex) ... ok
+test_1 (__main__.YunzhidaoSearchResult) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 39.945s
+
+OK
+
+**********************************************************************
+2017-02-24 18:08:32
+**********************************************************************
+test_category_image (__main__.YunzhidaoIndex) ... FAIL
+test_category_news (__main__.YunzhidaoIndex) ... ok
+test_category_training (__main__.YunzhidaoIndex) ... skipped 'must skipping'
+test_category_video (__main__.YunzhidaoIndex) ... FAIL
+test_go_top (__main__.YunzhidaoIndex) ... FAIL
+test_search_button_all (__main__.YunzhidaoIndex) ... ok
+test_search_button_image (__main__.YunzhidaoIndex) ... ok
+test_search_button_video (__main__.YunzhidaoIndex) ... ok
+
+======================================================================
+FAIL: test_category_image (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\workspace\autoTest\testcases.py", line 82, in test_category_image
+    assert item_name == category_title
+AssertionError
+
+======================================================================
+FAIL: test_category_video (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\workspace\autoTest\testcases.py", line 71, in test_category_video
+    assert item_name == category_title
+AssertionError
+
+======================================================================
+FAIL: test_go_top (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\workspace\autoTest\testcases.py", line 104, in test_go_top
+    self.assertTrue(go_top.is_displayed())
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 8 tests in 35.222s
+
+FAILED (failures=3, skipped=1)
+
+**********************************************************************
+2017-02-27 16:35:44
+**********************************************************************
+test_category_image (__main__.YunzhidaoIndex) ... FAIL
+test_category_news (__main__.YunzhidaoIndex) ... ok
+test_category_training (__main__.YunzhidaoIndex) ... skipped 'must skipping'
+test_category_video (__main__.YunzhidaoIndex) ... FAIL
+test_go_top (__main__.YunzhidaoIndex) ... ok
+test_search_button_all (__main__.YunzhidaoIndex) ... ok
+test_search_button_image (__main__.YunzhidaoIndex) ... ERROR
+test_search_button_video (__main__.YunzhidaoIndex) ... ERROR
+
+======================================================================
+ERROR: test_search_button_image (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\workspace\autoTest\testcases.py", line 50, in test_search_button_image
+    EC.element_to_be_selected(image_button_input), 'Image button is not selected')
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: Image button is not selected
+
+
+======================================================================
+ERROR: test_search_button_video (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\workspace\autoTest\testcases.py", line 37, in test_search_button_video
+    EC.element_to_be_selected(video_button_input), 'Video button is not selected')
+  File "C:\Program Files\Python35\lib\site-packages\selenium\webdriver\support\wait.py", line 80, in until
+    raise TimeoutException(message, screen, stacktrace)
+selenium.common.exceptions.TimeoutException: Message: Video button is not selected
+
+
+======================================================================
+FAIL: test_category_image (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\workspace\autoTest\testcases.py", line 88, in test_category_image
+    assert 'categoryType=image' in self.driver.current_url
+AssertionError
+
+======================================================================
+FAIL: test_category_video (__main__.YunzhidaoIndex)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\qinpan.zhao\Desktop\workspace\autoTest\testcases.py", line 79, in test_category_video
+    assert item_name == category_title
+AssertionError
+
+----------------------------------------------------------------------
+Ran 8 tests in 30.235s
+
+FAILED (failures=2, errors=2, skipped=1)

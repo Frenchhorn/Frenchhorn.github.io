@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="http://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <pre><a v-bind:href="url">菜鸟教程</a></pre>
+    <a v-on:click="test">onClick</a>
+</div>
+	
+<script>
+function test() {
+    location.href = 'http://www.runoob.com';
+}
+new Vue({
+  el: '#app',
+  data: {
+    url: 'http://www.runoob.com',
+    test: test
+  }
+})
+</script>
+</body>
+</html>

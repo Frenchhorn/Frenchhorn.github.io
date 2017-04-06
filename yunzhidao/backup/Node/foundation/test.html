@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<script type="text/javascript" src="js/jszip.js"></script>
+</head>
+
+
+<body>
+    <xml id="xml" src="productDetail.xml"></xml>
+    <input id="test" type="file" onchange="loadImageFile();" />
+</body>
+<script type="text/javascript">
+    var a, b, c;
+    oFReader = new FileReader()
+
+    oFReader.onload = function (oFREvent) {
+        console.log(oFREvent);
+        a = oFREvent.target.result;
+        b = new JSZip();
+        b.load(a)
+    };
+
+    function loadImageFile() {
+        if (document.getElementById("test").files.length === 0) { return; }
+        var oFile = document.getElementById("test").files[0];
+        console.log(oFile);
+        oFReader.readAsArrayBuffer(oFile);
+    }
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open('GET', 'http://localhost:4502/content/dam/china/accl/alyzd/productDetail.xml', false);
+    xmlHttp.send(null)
+    xmlDoc = xmlHttp.responseXML.documentElement;
+</script>
+</html>

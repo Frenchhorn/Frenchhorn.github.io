@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>实例</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        if (!!navigator.onLine) {
+            document.write('<link rel="stylesheet" href="https://cdn.static.runoob.com/libs/foundation/5.5.3/css/foundation.min.css">')
+            document.write('<link rel="stylesheet" href="http://static.runoob.com/assets/foundation-icons/foundation-icons.css">')
+            document.write('<scr' + 'ipt src="https://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></scr' + 'ipt>')
+            document.write('<scr' + 'ipt src="https://cdn.static.runoob.com/libs/foundation/5.5.3/js/foundation.min.js"></scr' + 'ipt>')
+            document.write('<scr' + 'ipt src="https://cdn.static.runoob.com/libs/foundation/5.5.3/js/vendor/modernizr.js"></scr' + 'ipt>')
+        }
+        else {
+            document.write('<link rel="stylesheet" href="./css/foundation.min.css">')
+            document.write('<link rel="stylesheet" href="./css/foundation-icons.css">')
+            document.write('<scr' + 'ipt src="./js/jquery.min.js"></scr' + 'ipt>')
+            document.write('<scr' + 'ipt src="./js/foundation.min.js"></scr' + 'ipt>')
+            document.write('<scr' + 'ipt src="./js/modernizr.js"></scr' + 'ipt>')
+        }
+    </script>
+</head>
+<style>
+    .filter {
+        margin-bottom: 8px;
+        padding: 8px 8px;
+        margin-left: 8px;
+        margin-top: 1px;
+    }
+    
+    .sub-nav input,
+    .sub-nav button{
+        margin-bottom: 0px;
+    }
+
+</style>
+
+<div id="selectFilter" class="reveal-modal" data-reveal style="min-height: 50vh;">
+    <div id="filters" class="columns medium-6 large-6 small-6">
+        <span>All</span>
+        <div class="switch tiny">
+            <input id="mySwitch1" type="checkbox" value="1">
+            <label class="switch-paddle" for="mySwitch1">
+                <span class="switch-active" aria-hidden="true">Yes</span>
+            </label>
+        </div>
+        <span>Default</span>
+        <div class="switch tiny">
+            <input id="mySwitch2" type="checkbox" value="1">
+            <label for="mySwitch2">
+            </label>
+        </div>
+        <span>Default</span>
+        <div class="switch tiny">
+            <input id="mySwitch3" type="checkbox" value="1">
+            <label for="mySwitch3">
+            </label>
+        </div> 
+    </div>
+    <div id="filters2" class="columns medium-6 large-6 small-6">
+        <span>All</span>
+        <div class="switch tiny">
+            <input id="mySwitch12" type="checkbox" value="1">
+            <label for="mySwitch12"></label>
+        </div>
+        <span>Default</span>
+        <div class="switch tiny">
+            <input id="mySwitch22" type="checkbox" value="1">
+            <label for="mySwitch22"></label>
+        </div>
+        <span>Default</span>
+        <div class="switch tiny">
+            <input id="mySwitch32" type="checkbox" value="1">
+            <label for="mySwitch32"></label>
+        </div> 
+    </div>
+</div>
+
+<body style="padding:20px">
+    <h2>Magellan</h2>
+    <h4 class="subheader">麦哲伦导航就是一个导航索引，位置是固定的，会根据用户滚动当前展示的内容自动切换导航栏上的导航项:</h4>
+    <hr style="margin: 0.5rem 0.5rem;">
+    <div data-magellan-expedition="fixed">
+        <dl class="sub-nav">
+            <dd data-magellan-arrival="none" class="columns large-8 medium-8 small-8">
+                <input type="text" placeholder="Name">
+            </dd>
+            <button type="button" class="button filter" data-reveal-id="selectFilter"><i class="fi-filter"></i></button>
+        </dl>
+    </div>
+    <hr style="margin: 0.5rem 0.5rem;">
+    <div style="height:200px;background-color:AliceBlue;">
+        <h3>页面 1</h3>
+        <p>滚动屏幕，查看导航栏上的变化。</p>
+    </div>
+    <div style="height:200px;background-color:AntiqueWhite;">
+        <h3>页面 2</h3>
+        <p>滚动屏幕，查看导航栏上的变化。</p>
+    </div>
+    <div style="height:200px;background-color:Azure;">
+        <h3>页面 3</h3>
+        <p>滚动屏幕，查看导航栏上的变化。</p>
+    </div>
+    <div style="height:200px;background-color:Beige;">
+        <h3>页面 4</h3>
+        <p>滚动屏幕，查看导航栏上的变化。</p>
+    </div>
+</body>
+<script>
+    var resize = function() {
+        var width = window.innerWidth
+        if (width > 900) {
+            width = (width - 900)/2 ;
+            $('body').css('padding', '20px ' + width + 'px 20px ' + width + 'px');
+        } else {
+            $('body').css('padding', '20px');
+        }
+    }
+    window.onresize = resize;
+    $(document).ready(function () {
+        $(document).foundation();
+    })
+</script>
+</html>

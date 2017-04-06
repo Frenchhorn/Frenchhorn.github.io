@@ -1,0 +1,10 @@
+BROWSER = 'chrome'
+ENV = 'd'
+LOG_FILE = 'log_file.txt'
+
+LOCAL_DOMAIN = 'http://localhost:4502'
+LOCAL_USER = 'admin'
+LOCAL_PWD = 'admin'
+DEV_DOMAIN = 'http://10.143.174.79:4503'
+QA_DOMAIN = 'http://bizqa.amwaynet.com.cn'
+PROD_DOMAIN = 'https://ch.amwaynet.com.cn'

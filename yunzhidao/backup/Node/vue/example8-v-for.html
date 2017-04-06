@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app1">
+  <ol>
+    <li v-for="site in sites">
+      {{ site.name }}
+    </li>
+  </ol>
+</div>
+
+<script>
+new Vue({
+  el: '#app1',
+  data: {
+    sites: [
+      { name: 'Runoob' },
+      { name: 'Google' },
+      { name: 'Taobao' }
+    ]
+  }
+})
+</script>
+    
+<div id="app2">
+  <ul>
+    <template v-for="site in sites">
+      <li>{{ site.name }}</li>
+      <li>--------------</li>
+    </template>
+  </ul>
+</div>
+
+<script>
+new Vue({
+  el: '#app2',
+  data: {
+    sites: [
+      { name: 'Runoob' },
+      { name: 'Google' },
+      { name: 'Taobao' }
+    ]
+  }
+})
+</script>
+    
+<div id="app3">
+  <ul>
+    <li v-for="value in object">
+    {{ value }}
+    </li>
+  </ul>
+  <ul>
+    <li v-for="(value, key) in object">
+    {{ key }} : {{ value }}
+    </li>
+  </ul>
+  <ul>
+    <li v-for="(value, key, index) in object">
+    No.{{index}} {{key}} : {{value}}
+    </li>
+  </ul>
+  <ul>
+    <li v-for="a in 10">
+    Number.{{a}}
+    </li>
+  </ul>
+</div>
+ 
+<script>
+new Vue({
+  el: '#app3',
+  data: {
+    object: {
+      name: '菜鸟教程',
+      url: 'http://www.runoob.com',
+      slogan: '学的不仅是技术，更是梦想！'
+    }
+  }
+})
+</script>
+</body>
+</html>

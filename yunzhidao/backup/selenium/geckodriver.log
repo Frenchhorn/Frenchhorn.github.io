@@ -1,0 +1,44 @@
+1478935544409	geckodriver	INFO	Listening on 127.0.0.1:52470
+1479366099528	geckodriver	INFO	Listening on 127.0.0.1:59084
+[Child 4504] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 4504] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+[Child 4260] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1481194381556	addons.update-checker	WARN	Update manifest for aushelper@mozilla.org did not contain an updates property
+1481194381570	addons.update-checker	WARN	Update manifest for webcompat@mozilla.org did not contain an updates property
+1481194381786	addons.update-checker	WARN	Update manifest for {972ce4c6-7e08-4474-a285-3208198ce6fd} did not contain an updates property
+1481194381804	addons.update-checker	WARN	Update manifest for e10srollout@mozilla.org did not contain an updates property
+1481194381817	addons.update-checker	WARN	Update manifest for firefox@getpocket.com did not contain an updates property
+1481194505563	addons.xpi	WARN	Add-on dict@www.youdao.com is not correctly signed.
+1481194789825	geckodriver	INFO	Listening on 127.0.0.1:49939
+1481194791790	mozprofile::profile	INFO	Using profile path C:\Users\QINPAN~1.ZHA\AppData\Local\Temp\rust_mozprofile.9DNETPtDDgAR
+1481194791799	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+1481194791819	geckodriver::marionette	INFO	Connecting to Marionette on localhost:49947
+1481194792759	Marionette	INFO	Listening on port 49947
+JavaScript error: chrome://marionette/content/listener.js, line 999: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+[Child 8148] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1481349302338	geckodriver	INFO	Listening on 127.0.0.1:59902
+1481349304324	mozprofile::profile	INFO	Using profile path C:\Users\QINPAN~1.ZHA\AppData\Local\Temp\rust_mozprofile.EQn0hvGP1ban
+1481349304340	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+1481349304371	geckodriver::marionette	INFO	Connecting to Marionette on localhost:59908
+1481349305978	Marionette	INFO	Listening on port 59908
+1481349373987	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+1481349373994	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+1481349374003	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+efox\firefox.exe
+1481349366682	geckodriver::marionette	INFO	Connecting to Marionette on localhost:56137
+1481349367875	Marionette	INFO	Listening on port 56137
+1481349504856	addons.productaddons	WARN	Failed downloading via XHR, status: 0, reason: error
+1481619501947	geckodriver	INFO	Listening on 127.0.0.1:54401
+1481619504001	mozprofile::profile	INFO	Using profile path C:\Users\QINPAN~1.ZHA\AppData\Local\Temp\rust_mozprofile.xZWvu67VQnni
+1481619504010	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+1481619504056	geckodriver::marionette	INFO	Connecting to Marionette on localhost:54407
+1481619505378	Marionette	INFO	Listening on port 54407
+JavaScript error: chrome://marionette/content/listener.js, line 999: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+[Child 9360] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
+1481619521312	geckodriver	INFO	Listening on 127.0.0.1:54444
+1481619523323	mozprofile::profile	INFO	Using profile path C:\Users\QINPAN~1.ZHA\AppData\Local\Temp\rust_mozprofile.gvSTGtzz2ccQ
+1481619523332	geckodriver::marionette	INFO	Starting browser C:\Program Files (x86)\Mozilla Firefox\firefox.exe
+1481619523351	geckodriver::marionette	INFO	Connecting to Marionette on localhost:54450
+1481619524299	Marionette	INFO	Listening on port 54450
+JavaScript error: chrome://marionette/content/listener.js, line 999: NS_ERROR_FAILURE: Component returned failure code: 0x80004005 (NS_ERROR_FAILURE) [nsIWebProgress.removeProgressListener]
+[Child 11828] WARNING: pipe error: 109: file c:/builds/moz2_slave/m-rel-w32-00000000000000000000/build/src/ipc/chromium/src/chrome/common/ipc_channel_win.cc, line 346
