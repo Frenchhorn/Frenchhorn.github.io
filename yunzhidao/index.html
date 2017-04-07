@@ -88,10 +88,17 @@
                                     (function(){
                                         var news = jsonFile.index.category.news || {};
                                         if (news.length === 0) {return false;}
-                                        var html = '';
+                                        var html = '', href = '';
                                         for (var i=0; i<news.length; i++){
+                                            if (!!news[i].redirectLink) {
+                                                href = news[i].redirectLink;
+                                            } else if (!!news[i].subTags && news[i].subTags.length>0) {
+                                                href = 'category.html?news-' + news[i].id;
+                                            } else {
+                                                href = 'searchResults.html?categoryType=news&category=' + news[i].id;
+                                            }
                                             html += '<li>' +
-                                                        '<a href="javascript:void(0);">' +
+                                                        '<a href="' + href + '">' +
                                                             '<i class="svg-icon ' + news[i].image + '"></i>' +
                                                             '<span class="text am-text-truncate">' + news[i].name + '</span>' +
                                                         '</a>' +

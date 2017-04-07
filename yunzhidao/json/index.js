@@ -5,9 +5,23 @@ window.jsonFile.index = {
         "news": [
             {
                 "name": "纽崔莱",
+                "id": "nutrilite",
                 "redirectLink": "",
                 "tags": "",
-                "image": "icon-1"
+                "image": "icon-1",
+                "subTags": [
+                    {
+                        "name": "纽崔莱品牌信息",
+                        "redirectLink": "",
+                        "tags": "",
+                        "subTags": [],
+                    }, {
+                        "name": "维生素C片",
+                        "redirectLink": "",
+                        "tags": "",
+                        "subTags": [],
+                    }
+                ]
             }, {
                 "name": "雅姿",
                 "redirectLink": "",
