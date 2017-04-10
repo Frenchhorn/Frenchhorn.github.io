@@ -19,7 +19,7 @@ window.jsonFile.index = {
                     }, {
                         "name": "维生素C片",
                         "id": "takellae-vitamin-c",
-                        "redirectLink": "",
+                        "redirectLink": "https://www.baidu.com",
                         "tags": "",
                         "subTags": [],
                     }
