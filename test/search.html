@@ -1,0 +1,30 @@
+<html lang="zh">
+
+<head>
+    <script src="index.js"></script>
+    <script>
+        var searchAuthor = true;
+        var searchName = true;
+        var search = function (name, author) {
+            var searchResults = [];
+            for (i in index) {
+                if (searchName) {
+                    if (index[i].name.indexOf(name) > -1) {
+                        searchResults.push(index[i]);
+                        continue;
+                    }
+                }
+                if (seachAuthor) {
+                    if (index[i].author && (index[i].author.indexOf(author) > -1)) {
+                        searchResults.push(index[i]);
+                    }
+                }
+            }
+            return searchResults;
+        }
+    </script>
+</head>
+
+<body> </body>
+
+</html>

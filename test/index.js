@@ -1,17 +1,18 @@
-var index = {
-    id:{
-        "name":"",
-        "author":"",
-        "location":[],
+var index = 
+{
+    0:{
+        "name":"test1",
+        "author":"test1",
+        "location":["kosuzu"],
     },
-    id:{
-        "name":"",
-        "author":"",
-        "location":[],
+    1:{
+        "name":"test2",
+        "author":"author1",
+        "location":["kosuzu"],
     },
-    id:{
-        "name":"",
-        "author":"",
-        "location":[],
+    2:{
+        "name":"test3",
+        "author":"author2",
+        "location":["kosuzu"],
     }
 }

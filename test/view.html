@@ -1,0 +1,21 @@
+<html lang="zh">
+
+<head>
+    <script>
+        var searchResults = ["kosuzu", "test"];
+        for (var i = 0; i < searchResults.length; i++) {
+            document.write('<scr' + 'ipt src="source/' + searchResults[i] + '.js"></scr' + 'ipt>');
+        }
+    </script>
+</head>
+
+<body> </body>
+<script>
+    window.onload = function () {
+        for (var i = 0; i < searchResults.length; i++) {
+            console.log(window[searchResults[i]]);
+        }
+    };
+</script>
+
+</html>

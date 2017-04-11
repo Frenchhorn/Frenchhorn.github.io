@@ -5,10 +5,11 @@ git
                 name
                 author
                 location
-        viewer.html
+        merge.py
+        view.html
         search.html
-    branch1
-        source.json
+    source
+        branch1.js
             id
             name
             author
@@ -23,8 +24,6 @@ git
                 stage
                     page
                     url
-    branch2
-        source.json
-    branch3
-        source.json
-    ...
+        branch2.js
+        branch3.js
+        ...
