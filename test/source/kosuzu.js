@@ -1,8 +1,8 @@
-var kosuzu = 
+source.kosuzu = 
 [{
-    "id":"",
-    "name":"",
-    "author":"",
+    "id":"0",
+    "name":"test1",
+    "author":"test1",
     "vol":{
         1:{
             1:"",
@@ -24,7 +24,7 @@ var kosuzu =
         },
     },
 },{
-    "id":"",
+    "id":"1",
     "name":"",
     "author":"",
     "vol":{

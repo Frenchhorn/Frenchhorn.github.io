@@ -1,4 +1,4 @@
-var test = 
+source.test = 
 [{
     "id":"",
     "name":"",
