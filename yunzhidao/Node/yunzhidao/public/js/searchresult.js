@@ -62,7 +62,7 @@ amwaysearch.components.searchresult = (function($, window) {
             type: 'GET',
             dataType: 'xml',
             async: false,
-            url: '/content/dam/china/accl/alyzd/productDetail.xml'
+            url: 'productDetail.xml'
         });
 
         loadAjax.done(function(data, textStatus, jqXHR) {
@@ -957,15 +957,15 @@ amwaysearch.components.searchresult = (function($, window) {
     var updateKeyword = function(searchWord) {
         /* jshint maxlen: 110 */
         var encodeKeyword = encodeURIComponent(amwaysearch.components.search.escapeChar(searchWord));
-        var loadAjax = $.ajax({
-            dataType: 'json',
-            url: '/bin/search/update?keyword=' + encodeKeyword + '&searchType=' +
-                 yunzhidao.searchResultInfo.searchType
-        });
+        // var loadAjax = $.ajax({
+        //     dataType: 'json',
+        //     url: 'https://ch.amwaynet.com.cn/bin/search/update?keyword=' + encodeKeyword + '&searchType=' +
+        //          yunzhidao.searchResultInfo.searchType
+        // });
 
-        loadAjax.done(function(data) {});
+        // loadAjax.done(function(data) {});
 
-        loadAjax.fail(function(data) {});
+        // loadAjax.fail(function(data) {});
     };
 
     var doImageSearch = function() {
@@ -1322,13 +1322,13 @@ amwaysearch.components.searchresult = (function($, window) {
 
         getProductDataInfo();
 
-        if (yunzhidao.config.isRunMode) {
-            if (yunzhidao.config.isWeixin) {
-                amwaysearch.components.wechatInterface.initToken(initSearchResultsPage);
-            } else {
+        // if (yunzhidao.config.isRunMode) {
+        //     if (yunzhidao.config.isWeixin) {
+        //         amwaysearch.components.wechatInterface.initToken(initSearchResultsPage);
+        //     } else {
                 initSearchResultsPage();
-            }
-        }
+            // }
+        // }
 
         if (history.pushState) {
             window.addEventListener('popstate', showHistoryPage);

@@ -56,15 +56,10 @@ amwaysearch.components.searchinput = (function($, window) {
     };
 
     var onSearchClick = function(keyword) {
-        /* global s */
         if (!keyword) {
             keyword = params.keyword;
         }
         if (!keyword) {return false;}
-        s.linkTrackVars = 'prop9';
-        s.prop9 = keyword;
-        s.useForcedLinkTracking = false;
-        s.tl(true, 'o', keyword + ' （搜索框）');
 
         var url = 'searchResults.html?keyword=' + encodeURIComponent(keyword);
         if (!!params.categoryTitle) {
@@ -175,7 +170,7 @@ amwaysearch.components.searchinput = (function($, window) {
 
     function start() {
         yunzhidao = window.yunzhidao || {};
-        if (document.referrer.indexOf('solr') < 0) {
+        if (document.referrer.indexOf('index.html') < 0) {
             params = defaultParams;
         } else {
             params = getParamsAndValue();

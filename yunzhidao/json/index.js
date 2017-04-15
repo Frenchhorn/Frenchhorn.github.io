@@ -19,7 +19,7 @@ window.jsonFile.index = {
                     }, {
                         "name": "维生素C片",
                         "id": "takellae-vitamin-c",
-                        "redirectLink": "",
+                        "redirectLink": "https://www.baidu.com",
                         "tags": "",
                         "subTags": [],
                     }
@@ -86,7 +86,9 @@ window.jsonFile.index = {
                 "name": "健康",
                 "redirectLink": "",
                 "tags": "",
-                "image": "icon-26"
+                "image": "icon-26",
+                "id": "health",
+                "path": "/news/video/health/"
             }, {
                 "name": "美丽",
                 "redirectLink": "",
@@ -118,9 +120,10 @@ window.jsonFile.index = {
             {
                 "name": "纽崔莱",
                 "redirectLink": "",
-                "tags": "",
+                "tags": ["纽崔莱"],
                 "image": "images/thumbnail/btn_list_4.png",
-                "color": "dark-green"
+                "color": "dark-green",
+                "id": "niucuilai",
             }, {
                 "name": "雅姿",
                 "redirectLink": "",
