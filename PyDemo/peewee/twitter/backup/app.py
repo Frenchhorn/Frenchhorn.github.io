@@ -11,7 +11,7 @@ from hashlib import md5
 import peewee
 
 # config - aside from our database, the rest is for use by Flask
-DATABASE = 'tweepee.db'
+DATABASE = 'twitter.db'
 DEBUG = True
 SECRET_KEY = 'hin6bab8ge25*r=x&amp;+5$0kn=-#log$pt^#@vrqjld!^2ci@g*b'
 
@@ -305,5 +305,4 @@ def _inject_user():
 
 # allow running from the command line
 if __name__ == '__main__':
-    #app.run()
-    pass
+    app.run()
