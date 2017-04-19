@@ -82,14 +82,14 @@ amwaysearch.components.search = (function($, window) {
     };
 
     var updateFlow = function(url) {
-        var loadAjax = $.ajax({
-            dataType: 'json',
-            url: 'https://ch.amwaynet.com.cn/bin/search/solr_update?action=updateFlow&content=' + encodeURIComponent(url)
-        });
+        // var loadAjax = $.ajax({
+        //     dataType: 'json',
+        //     url: 'https://ch.amwaynet.com.cn/bin/search/solr_update?action=updateFlow&content=' + encodeURIComponent(url)
+        // });
 
-        loadAjax.done(function(data) {});
+        // loadAjax.done(function(data) {});
 
-        loadAjax.fail(function(data) {});
+        // loadAjax.fail(function(data) {});
     };
 
     var showResultPage = function(url) {
