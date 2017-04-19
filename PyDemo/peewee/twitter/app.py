@@ -1,4 +1,5 @@
 import datetime
+import os.path
 
 from hashlib import md5
 from functools import wraps
@@ -65,10 +66,25 @@ def get_current_user():
     if flask.session.get('logged_in'):
         return User.get(User.id == flask.session['logged_in'])
     else:
-        raise AssertionError('No logged_in session')
+        return login()
 
-def object_list():
-    pass
+def object_list(template_name, qr, var_name='object_list', **kwargs):
+    kwargs.update(
+        page=int(flask.request.args.get('page', 1)),
+        pages=qr.count() /20 + 1
+    )
+    kwargs[var_name] = qr.paginate(kwargs['page'])
+    return flask.render_template(template_name, **kwargs)
+
+@app.before_request
+def before_request():
+    flask.g.db = database
+    flask.g.db.connect()
+    
+@app.after_request
+def after_request(response):
+    flask.g.db.close()
+    return response
 
 @app.route('/')
 def homepage():
@@ -81,16 +97,44 @@ def homepage():
 def private_timeline():
     user = get_current_user()
     messages = Message.select().where(Message.user << user.following())
-    return object_list('private_message.html', messages, 'message_list')
+    return object_list('private_messages.html', messages, 'message_list')
 
 @app.route('/public/')
 def public_timeline():
-    pass
+    messages = Message.select()
+    return object_list('public_messages.html', messages, 'message_list')
 
-@app.route('/<name>')
-def hello(name='world'):
-    return 'Hello %s!'%name
+@app.route('/join/', methods=['GET', 'POST'])
+def join():
+    return 'join'
+
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    return 'login'
+
+@app.route('/logout/')
+def logout():
+    return 'logout'
+
+@app.route('/following/')
+def following():
+    return 'following'
+
+@app.route('/followers/')
+def follows():
+    return 'followers'
+
+@app.route('/users/')
+def user_list():
+    users = User.select()
+#     return object_list('user_list.html', users, 'user_list')
+    return 'users'
+
+# create a message
+@app.route('/create/', methods=['GET', 'POST'])
+def create():
+    return 'create'
 
 if __name__ == '__main__':
-    #app.run()
-    pass
+    app.run()
+    #pass
