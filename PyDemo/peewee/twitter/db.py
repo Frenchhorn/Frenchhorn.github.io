@@ -67,5 +67,5 @@ def create_tables():
     database.close()
 
 if __name__ == '__main__':
-    if os.path.isfile(DATABASE):
+    if not os.path.isfile(DATABASE):
         create_tables()
