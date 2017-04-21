@@ -11,7 +11,7 @@ from hashlib import md5
 import peewee
 
 # config - aside from our database, the rest is for use by Flask
-DATABASE = 'twitter.db'
+DATABASE = 'peewee.db'
 DEBUG = True
 SECRET_KEY = 'hin6bab8ge25*r=x&amp;+5$0kn=-#log$pt^#@vrqjld!^2ci@g*b'
 
