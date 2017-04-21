@@ -3,7 +3,7 @@ import datetime
 from hashlib import md5
 from functools import wraps
 
-import flask
+import flask, peewee
 from db import User, Message, Relationship, database
 
 # 配置
