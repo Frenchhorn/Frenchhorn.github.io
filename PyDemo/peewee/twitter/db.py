@@ -39,7 +39,7 @@ class User(BaseModel):
         ).count() > 0
 
     def gravatar_url(self, size=80):
-        return 'http://lorempixel.com/80/80/?' + self.username
+        return 'http://lorempixel.com/'+str(size)+'/'+str(size)+'/?' + self.username
 
 # 关系表
 class Relationship(BaseModel):
