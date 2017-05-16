@@ -70,7 +70,7 @@ def validFileTime(fileList):
     newFileList = []
     for file in fileList:
         fileDate = File.getFileDate(file)
-        if fileDate and fileDate == os.path.getmtime('source/'+file):
+        if not fileDate or fileDate == os.path.getmtime('source/'+file):
             continue
         newFileList.append(file)
     return newFileList
