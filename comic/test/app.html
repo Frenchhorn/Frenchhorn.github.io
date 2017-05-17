@@ -5,26 +5,25 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <script type="text/javascript" src="js/vue.js"></script>
     <script type="text/javascript" src="index.js"></script>
+
     <script>
         var source = {};
-        var searchType = 'all';
         var searchWord = '';
     </script>
+    <script type="text/javascript" src="source/kosuzu.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="row">
+        <div class="row" id="searchBar" v-if="seen">
             <div class="col-md-10 col-md-offset-1 jumbotron">
                 <div class="text-center">
                     <h1>漫画搜索</h1>
-                    <form method="GET" action="">
-                        <input type="text" name="w" required="" placeholder="请输入搜索关键字" id="searchWord" class="form-control input-lg">  
-                    </form>
+                    <input v-on:keyup="search" v-model="value" type="text" required="" placeholder="请输入搜索关键字" class="form-control input-lg">
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="searchResult" v-if="seen">
             <div class="col-md-10 col-md-offset-1">
 
             </div>
@@ -32,55 +31,27 @@
     </div>
 </body>
 <script>
-    //return    [Object1, Object2, Object3...]
-    var getResult = function (searchWord, searchType) {
-        searchWord = searchWord ? searchWord : window.searchWord;
-        searchType = searchType ? searchType : window.searchType;
-        console.log(searchWord, searchType)
-        var searchResult = [];
-        if (!searchWord) {
-            return searchResult;
+    var searchBar = new Vue({
+        el: '#searchBar',
+        data: {
+            seen: true,
+            value: null,
+        },
+        methods: {
+            search: function(){
+                console.log(this.value)
+            },
         }
-        for (i in index) {
-            if (searchType === 'article' || searchType === 'all') {
-                if (index[i].name.indexOf(searchWord) > -1) {
-                    searchResult.push(index[i]);
-                    continue;
-                }
-            }
-            if (searchType === 'author' || searchType === 'all') {
-                if (index[i].author && (index[i].author.indexOf(searchWord) > -1)) {
-                    searchResult.push(index[i]);
-                }
-            }
+    })
+
+    var searchResult = new Vue({
+        el: '#searchResult',
+        data: {
+
+        },
+        methods: {
+            
         }
-        return searchResult;
-    }
-    var loadResult = function (searchResult) {
-        var searchResultElement = document.getElementById('searchResult');
-        var itemElement;
-        for (var i = 0; i < searchResult.length; i++) {
-            itemElement = document.createElement('div');
-            itemElement.innerText = 'Name: ' + searchResult[i].name + ' ' + 'Author: ' + searchResult[i].author + ' ' + 'Location: ' + searchResult[i].contributor;
-            searchResultElement.append(itemElement);
-        }
-    };
-    //param     searchResult   ['kosuzu','test']
-    //return    null
-    var loadSource = function (sourceList) {
-        var headElement = document.getElementsByTagName('head')[0];
-        var scriptElement;
-        for (var i = 0; i < searchResult.length; i++) {
-            scriptElement = document.createElement('script');
-            scriptElement.src = 'source/' + searchResult[i] + '.js';
-            headElement.append(script);
-        }
-    };
-    //Event
-    document.getElementsByName('filter').forEach(function (item, index) {
-        item.onclick = function () {
-            searchType = item.value;
-        }
-    });
+    })
 </script>
 </html>
