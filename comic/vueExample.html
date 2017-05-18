@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Vue Functions</title>
+    <meta charset="utf-8">
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app1">
+        <p>使用模板语法显示内容</p>
+        <p>使用v-on设置事件</p>
+        <p>{{ message }}</p>
+        <button v-on:click='reverse'>逆转</button>
+    </div>
+    <script>
+        new Vue({
+            el: '#app1',
+            data: {
+                message: 'Hello Vue.js!'
+            },
+            methods: {
+                reverse: function(){
+                    this.message = this.message.split('').reverse().join('')
+                }
+            }
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app2">
+    <p>使用v-bind绑定元素属性</p>
+        <p v-bind:title="message">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app2',
+            data: {
+                message: '页面加载于: ' + new Date(),
+            }
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app3" v-on:click="hide">
+        <p>使用v-if</p>
+        <p v-if="seen">现在可以看见，点击消失</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app3',
+            data: {
+                seen: true,
+            },
+            methods: {
+                hide: function(){
+                    this.seen = false
+                }
+            }
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app4" v-on:click='add'>
+        <ol>
+            <li v-for="todo in todos">
+                {{ todo.text }}
+            </li>
+        </ol>
+    </div>
+    <script>
+        new Vue({
+            el: '#app4',
+            data: {
+                todos: [
+                    {text: '使用v-for'},
+                    {text: '点击增加'},
+                    {text: 'text3'},
+                ]
+            },
+            methods: {
+                add: function(){
+                    this.todos.push({text: 'add'})
+                }
+            }
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app5">
+        <p>{{ message }}</p>
+        <input v-model="message">
+    </div>
+    <script>
+        new Vue({
+            el: '#app5',
+            data: {
+                message: '双向绑定'
+            }
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app6" v-on:click='add'>
+        <ol>
+            <li>使用component</li>
+            <todo-item v-for="item in items" v-bind:todo="item"></todo-item>
+        </ol>
+    </div>
+    <script>
+        Vue.component('todo-item', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        });
+        t = new Vue({
+            el: '#app6',
+            data: {
+                items: [
+                    {text: '点击增加'},
+                    {text: 'test2'},
+                ]
+            },
+            methods: {
+                add: function(){
+                    this.items.push({text: 'add'})
+                }
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app7">
+        <div class="static" v-bind:class="{ active: isActive, 'text-danger': hasError }">添加设置class</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app7',
+            data: {
+                isActive: true,
+                hasError: false,
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app8">
+        <div class="static" v-bind:class="classObject">使用classObject添加设置class</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app8',
+            data: {
+                classObject: {
+                    active: false,
+                    'text-danger': true,
+                }
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app9">
+        <div class="static" v-bind:class="classObject">使用计算属性</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app9',
+            computed: {
+                classObject: function(){
+                    return {
+                        active: false,
+                        'text-danger': true
+                    }
+                }
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app10">
+        <div class="static" v-bind:class="[activeClass, errorClass]">使用数组语法</div>
+    </div>
+    <script>
+        new Vue({
+            el: '#app10',
+            data: {
+                activeClass: 'active',
+                errorClass: 'text-danger'
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app11" v-on:click="hide">
+        <p>使用v-show</p>
+        <p v-show="seen">现在可以看见，点击消失</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app11',
+            data: {
+                seen: true,
+            },
+            methods: {
+                hide: function(){
+                    this.seen = !this.seen
+                }
+            }
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app12">
+        <p>使用v-for获取值/键/索引</p>
+        <ul>
+            <li v-for="(value, key, index) in object">
+                {{ index }}, {{ key }}, {{ value }}
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '#app12',
+            data: {
+                object: {
+                    FirstName: 'John',
+                    LastName: 'Doe',
+                    Age: 30
+                },
+            },
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app13">
+        <p>使用v-for进行整数迭代</p>
+        <ul>
+            <li v-for="i in 3">
+                {{ i }}
+            </li>
+        </ul>
+    </div>
+    <script>
+        new Vue({
+            el: '#app13',
+        });
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div id="app14">
+        <input v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="组件和v-for">
+        <ul>
+            <li is="todo-item" v-for="(todo, index) in todos" v-bind:title="todo" v-on:remove="todos.splice(index, 1)"></li>
+        </ul>
+    </div>
+    <script>
+        Vue.component('todo-item', {
+            template: '\
+                <li>{{ title }}\
+                    <button v-on:click="$emit(\'remove\')">X</button>\
+                </li>',
+            props: ['title']
+        })
+        new Vue({
+            el: '#app14',
+            data: {
+                newTodoText: '',
+                todos: [
+                    'Do the dishes',
+                    'Take out the trash',
+                    'Mow the lawn'
+                ]
+            },
+            methods: {
+                addNewTodo: function () {
+                    this.todos.push(this.newTodoText)
+                    this.newTodoText = ''
+                }
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>事件修饰符</p>
+        <table>
+            <tr><td>.stop</td><td>阻止事件冒泡</td></tr>
+            <tr><td>.prevent</td><td>不重载页面</td></tr>
+            <tr><td>.capture</td><td>添加事件侦听器时使用事件捕获模式</td></tr>
+            <tr><td>.self</td><td>只当事件在该元素本身（而不是子元素）触发时触发回调</td></tr>
+            <tr><td>.once</td><td>只会触发一次</td></tr>
+            <tr><td></td><td>修饰符可以串联</td></tr>
+            <tr><td></td><td>可以只有修饰符</td></tr>
+        </table>
+        <!-- 例子 -->
+        <!-- 阻止单击事件冒泡 -->
+        <!-- <a v-on:click.stop="doThis"></a> -->
+        <!-- 提交事件不再重载页面 -->
+        <!-- <form v-on:submit.prevent="onSubmit"></form> -->
+        <!-- 修饰符可以串联  -->
+        <!-- <a v-on:click.stop.prevent="doThat"></a> -->
+        <!-- 只有修饰符 -->
+        <!-- <form v-on:submit.prevent></form> -->
+        <!-- 添加事件侦听器时使用事件捕获模式 -->
+        <!-- <div v-on:click.capture="doThis">...</div> -->
+        <!-- 只当事件在该元素本身（而不是子元素）触发时触发回调 -->
+        <!-- <div v-on:click.self="doThat">...</div> -->
+    </div>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>按键修饰符</p>
+        <li>使用keyCode,如-on:keyup.13</li>
+        <p>以下为别名</p>
+        <li>.enter</li>
+        <li>.tab</li>
+        <li>.delete (捕获 “删除” 和 “退格” 键)</li>
+        <li>.esc</li>
+        <li>.space</li>
+        <li>.up</li>
+        <li>.down</li>
+        <li>.left</li>
+        <li>.right</li>
+        <li>.ctrl </li>
+        <!-- Ctrl + Click -->
+        <!-- <div @click.ctrl="doSomething">Do something</div> -->
+        <li>.alt</li>
+        <!-- Alt + C -->
+        <!-- <input @keyup.alt.67="clear"> -->
+        <li>.shift</li>
+        <li>.meta</li>
+        <!-- 通过全局 config.keyCodes 对象自定义按键修饰符别名 -->
+        <!-- 可以使用 v-on:keyup.f1 -->
+        <!-- Vue.config.keyCodes.f1 = 112 -->
+    </div>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>使用组件</p>
+        <p>注册</p>
+        <!-- 使用 Vue.component(tagName, options) -->
+        <div id="com1">
+            <com-1></com-1>
+        </div>
+    </div>
+    <script>
+        Vue.component('com-1', {
+            //选项
+            template: '<div>A custom component-1</div>'
+        });
+
+        //在初始化实例之前需要注册了组件
+        new Vue({
+            el: '#com1'
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>局部注册</p>
+        <div id="com2">
+            <com-2></com-2>
+        </div>
+    </div>
+    <script>
+        var Child = {
+            template: '<div>A custom component-2</div>'
+        };
+
+        new Vue({
+            el: '#com2',
+            components: {
+                'com-2': Child
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+    
+    <div>
+        <p>is属性，用于ul/ol/table/select下的元素</p>
+        <div id="com3">
+            <ul>
+                <li is="com-3">
+                <!-- 直接使用是不生效的 -->
+                <com-3></com-3>
+            </ul>
+        </div>
+    </div>
+    <script>
+        var Child = {
+            template: '<li>A custom component-3</li>'
+        };
+
+        new Vue({
+            el: '#com3',
+            components: {
+                'com-3': Child
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>组件data属性需是函数</p>
+        <div id="com4">
+            <com-4></com-4>
+            <com-4></com-4>
+        </div>
+    </div>
+    <script>
+        Vue.component('com-4', {
+            template: '<button v-on:click="counter += 1">{{ counter }} {{ num }}</button>',
+            data: function(){
+                return {
+                    counter: 0,
+                    num: 0
+                }
+            }
+        });
+
+        new Vue({
+            el: '#com4',
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>父组件通过prop传递数据给子组件</p>
+        <div id="com5">
+            <com-5 message="com-5"></com-5>
+        </div>
+    </div>
+    <script>
+        Vue.component('com-5', {
+            props: ['message'],
+            template: '<div>{{ message }}</div>',
+        });
+
+        new Vue({
+            el: '#com5',
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>prop的驼峰式与短横线隔开式</p>
+        <div id="com6">
+            <com-6 the-message="com-6"></com-6>
+        </div>
+    </div>
+    <script>
+        Vue.component('com-6', {
+            props: ['theMessage'],
+            template: '<div>{{ theMessage }}</div>',
+        });
+
+        new Vue({
+            el: '#com6',
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+
+    <div>
+        <p>动态prop</p>
+        <div id="com7">
+            <input v-model="parentMsg">
+            <com-7 v-bind:the-message="parentMsg"></com-7>
+        </div>
+    </div>
+    <script>
+        Vue.component('com-7', {
+            props: ['theMessage'],
+            template: '<div>{{ theMessage }}</div>',
+        });
+
+        new Vue({
+            el: '#com7',
+            data: {
+                parentMsg: 'com-7'
+            }
+        })
+    </script>
+    <div>--------------------------------------------------</div>
+</body>
+</html>
