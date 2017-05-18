@@ -25,7 +25,7 @@
         </div>
         <div class="row" id="searchResult" v-if="seen">
             <div class="col-md-10 col-md-offset-1">
-
+                <li v-for="(value, key) in index">{{ key + value["名称"]}}</li>
             </div>
         </div>
     </div>
@@ -47,7 +47,8 @@
     var searchResult = new Vue({
         el: '#searchResult',
         data: {
-
+            seen: true,
+            index: index
         },
         methods: {
             
