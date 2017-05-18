@@ -25,8 +25,9 @@
         </div>
         <div class="row" id="searchResult" v-if="seen">
             <div class="col-md-10 col-md-offset-1">
-                <li v-for="(value, key) in index">{{ key + value["名称"]}}</li>
+                <li v-for="item in index" v-show="item.number" v-on:click="hide(item.number)" v-bind:number="item.number" v-bind:comic="item.comic" v-bind:author="item.author" v-bind:contributor="item.contributor">{{ item.comic }}</li>
             </div>
+            <button v-on:click="hide(1)">123</button>
         </div>
     </div>
 </body>
@@ -42,7 +43,7 @@
                 console.log(this.value)
             },
         }
-    })
+    });
 
     var searchResult = new Vue({
         el: '#searchResult',
@@ -51,8 +52,11 @@
             index: index
         },
         methods: {
-            
-        }
-    })
+            hide: function(number){
+                console.log(this.index[number-1])
+                this.index[number-1].number = false
+            }
+        },
+    });
 </script>
 </html>
