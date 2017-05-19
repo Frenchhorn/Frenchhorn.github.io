@@ -1,9 +1,11 @@
+<!DOCTYPE html>
 <html lang="zh">
 
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <script type="text/javascript" src="js/vue.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
 
     <script>
@@ -25,9 +27,8 @@
         </div>
         <div class="row" id="searchResult" v-if="seen">
             <div class="col-md-10 col-md-offset-1">
-                <li v-for="item in index" v-show="item.number" v-on:click="hide(item.number)" v-bind:number="item.number" v-bind:comic="item.comic" v-bind:author="item.author" v-bind:contributor="item.contributor">{{ item.comic }}</li>
+                <li v-for="item in index" style="display: none;" v-bind:number="item.number" v-bind:comic="item.comic" v-bind:author="item.author" v-bind:contributor="item.contributor">{{ item.comic }}</li>
             </div>
-            <button v-on:click="hide(1)">123</button>
         </div>
     </div>
 </body>
@@ -40,7 +41,16 @@
         },
         methods: {
             search: function(){
-                console.log(this.value)
+                // console.log(this.value)
+                variables.comic.hide()
+                var value = this.value.replace(variables.pattern, '')
+                // console.log(value)
+                if (value){
+                    $('#searchResult [comic*=' + value + ']').show()
+                    $('#searchResult [author*=' + value + ']').show()
+                    $('#searchResult [number*=' + value + ']').show()
+                    $('#searchResult [contributor*=' + value + ']').show()
+                }
             },
         }
     });
@@ -52,11 +62,12 @@
             index: index
         },
         methods: {
-            hide: function(number){
-                console.log(this.index[number-1])
-                this.index[number-1].number = false
-            }
         },
     });
+
+    var variables = {
+        comic: $('#searchResult [comic]'),
+        pattern: /[`~\!@$%\^&\*\(\)\-\+\=\{\}\[\]\\\|;\:'",<\.>\/\?]/g,
+    }
 </script>
 </html>
