@@ -2,18 +2,23 @@ var index =
 [
 {
     "number":1,
-    "comic":"test1",
-    "author":"test1",
+    "comic":"东方铃奈庵",
+    "author":"春河もえ/zun",
     "contributor":["kosuzu"],
 },{
     "number":2,
-    "comic":"test2",
-    "author":"author1",
+    "comic":"四叶妹妹",
+    "author":"东清彦",
     "contributor":["kosuzu"],
 },{
     "number":3,
-    "comic":"test3",
-    "author":"author2",
+    "comic":"迷你偶像",
+    "author":"明音",
+    "contributor":["kosuzu", "test"],
+},{
+    "number":4,
+    "comic":"东方三月精",
+    "author":"比良坂真琴/zun",
     "contributor":["kosuzu", "test"],
 }
 ]
