@@ -15,6 +15,26 @@
                 source[contributor] = ''
             }
         }
+        var t = function(){
+            var para=document.createElement("script");
+            para.src = 'source/kosuzu.js'
+            var element=document.getElementsByTagName("head")[0];
+            element.appendChild(para)
+        }
+        var promise = new Promise(function(resolve, reject) {
+          t()
+
+          if (source.kosuzu !== ''){
+            resolve(value);
+          } else {
+            reject(error);
+          }
+        });
+        promise.then(function(value) {
+          console.log(1)
+        }, function(error) {
+          console.log(2)
+        });
     </script>
     <!-- <script type="text/javascript" src="source/kosuzu.js"></script> -->
 </head>
