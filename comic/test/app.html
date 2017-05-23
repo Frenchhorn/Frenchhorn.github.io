@@ -14,37 +14,18 @@
         #searchResult .panel-body button.btn-md{
             margin-right: 5px; 
             margin-top: 5px;
+            display: none;
         }
     </style>
     <script>
         var source = {}
+        var emptyList = []
         for (let item of index){
             for (let contributor of item.contributor){
-                source[contributor] = ''
+                source[contributor] = emptyList
             }
         }
-        var t = function(){
-            var para=document.createElement("script");
-            para.src = 'source/kosuzu.js'
-            var element=document.getElementsByTagName("head")[0];
-            element.appendChild(para)
-        }
-        var promise = new Promise(function(resolve, reject) {
-          t()
-
-          if (source.kosuzu !== ''){
-            resolve(value);
-          } else {
-            reject(error);
-          }
-        });
-        promise.then(function(value) {
-          console.log(1)
-        }, function(error) {
-          console.log(2)
-        });
     </script>
-    <!-- <script type="text/javascript" src="source/kosuzu.js"></script> -->
 </head>
 
 <body>
@@ -70,7 +51,7 @@
                             <span class="glyphicon glyphicon-plus"></span> 展开
                         </button>
                         <br><br>
-                        <button type="button" class="btn btn-default btn-md" v-for="i in 10">第{{ i }}话</button> 
+                        <button type="button" class="btn btn-default btn-md" v-for="i in item.episode.length">第{{ i }}话</button> 
                     </div>
                 </div>
             </div>
@@ -143,11 +124,41 @@
         el: '#searchResult',
         data: {
             seen: true,
-            index: index
+            index: index,
         },
         methods: {
             show: function(item){
-                console.log(item)
+                // console.log(item)
+                this.loadSource(item.contributor, function(){
+                    item.episode = searchResult.getSource(item.contributor)
+                    Vue.nextTick(function(){
+                        $('#searchResult [number=' + item.number + '] button.btn-md').show()
+                    })
+                })
+            },
+            loadSource: function(contributorList, callback){
+                // 加载文件，加载结束后进行回调
+                contributorList = contributorList.filter(x => source[x] === emptyList)
+                if (contributorList.length === 0){
+                    callback()
+                    return
+                }
+                let headElement = document.getElementsByTagName("head")[0]
+                for (contributor of contributorList){
+                    let scriptElement = document.createElement("script")
+                    scriptElement.src = 'source/' + contributor + '.js'
+                    headElement.appendChild(scriptElement)
+                }
+                let check = setInterval(function(){
+                    contributorList = contributorList.filter(x => source[x] === emptyList)
+                    if (contributorList.length === 0){
+                        clearInterval(check)
+                        callback()
+                    }
+                }, 200)
+            },
+            getSource: function(contributor){
+                return [1,2,3]
             }
         },
     })
