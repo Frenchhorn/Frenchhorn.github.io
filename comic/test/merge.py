@@ -1,13 +1,16 @@
-import os.path, datetime
+import os.path
+import datetime
 import peewee
 
 DATABASE = 'source.db'
 
 db = peewee.SqliteDatabase(DATABASE)
 
+
 class BaseModel(peewee.Model):
     class Meta:
         database = db
+
 
 class Comic(BaseModel):
     comicID = peewee.IntegerField(unique=True)
@@ -23,16 +26,17 @@ class Comic(BaseModel):
     @staticmethod
     def searchByAuthor(author):
         return Comic.select().where(Comic.author.contains(author))
-    
+
     @staticmethod
     def searchByLocation(location):
         return Comic.select().where(Comic.location.contains(location))
-    
+
     @staticmethod
     def searchByAll(word):
         return Comic.select().where(Comic.name.contains(word) |
                                     Comic.author.contains(word) |
                                     Comic.location.contains(word))
+
 
 class Episode(BaseModel):
     comic = peewee.ForeignKeyField(Comic, related_name='comic_episode')
@@ -41,15 +45,17 @@ class Episode(BaseModel):
     contributor = peewee.CharField()
     date = peewee.DateTimeField(default=datetime.datetime.now())
 
+
 class Page(BaseModel):
     episode = peewee.ForeignKeyField(Episode, related_name='episode_page')
     page = peewee.IntegerField()
     url = peewee.CharField()
 
+
 class File(BaseModel):
     name = peewee.CharField(unique=True)
     date = peewee.DateTimeField()
-    
+
     @staticmethod
     def getFileDate(name):
         try:
@@ -70,16 +76,19 @@ def validFileTime(fileList):
     newFileList = []
     for file in fileList:
         fileDate = File.getFileDate(file)
-        if not fileDate or fileDate == os.path.getmtime('source/'+file):
+        if not fileDate or fileDate == os.path.getmtime('source/' + file):
             continue
         newFileList.append(file)
     return newFileList
 
+
 def validFile(fileList):
     pass
 
+
 def insertDataBase(fileList):
     pass
+
 
 def test():
     Comic.create(comicID=1, name='1')
@@ -88,21 +97,23 @@ def test():
     Episode.create(comic=c, contributor='test')
     File.create(name='t', date=datetime.datetime.now())
 
+
 def main():
     if not os.path.isfile(DATABASE):
         initDatabase()
     db.connect()
-    
-    try:
+
+    if 'source' in os.listdir() and os.path.isdir('source'):
         fileList = os.listdir('source')
-    except:
+    else:
         print("Can't find folder source")
         db.close()
         return False
-    
+
     fileList = validFileTime(fileList)
     fileList = validFile(fileList)
     insertDataBase(fileList)
+
 
 if __name__ == '__main__':
     main()

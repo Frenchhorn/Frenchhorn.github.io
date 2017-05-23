@@ -7,6 +7,13 @@
     <script type="text/javascript" src="js/vue.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
+    <script>
+        var source = {}
+        var emptyList = []
+        for (item of index){
+            item.episode = emptyList
+        }
+    </script>
     <style type="text/css">
         #searchResult .panel-info{
             display: none;
@@ -17,15 +24,6 @@
             display: none;
         }
     </style>
-    <script>
-        var source = {}
-        var emptyList = []
-        for (let item of index){
-            for (let contributor of item.contributor){
-                source[contributor] = emptyList
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -47,11 +45,11 @@
                     </div>
                     <div class="panel-body">
                         <span>作者：{{ item.author }}</span>
-                        <button type="button" class="btn btn-default btn-sm pull-right" v-on:click="show(item)">
-                            <span class="glyphicon glyphicon-plus"></span> 展开
+                        <button type="button" class="btn btn-default btn-sm pull-right" v-on:click="showMenu(item)">
+                            <span class="glyphicon glyphicon-plus"></span> 目录
                         </button>
                         <br><br>
-                        <button type="button" class="btn btn-default btn-md" v-for="i in item.episode.length">第{{ i }}话</button> 
+                        <button type="button" class="btn btn-default btn-md" v-for="episode in item.episode" v-on:click="loadPage(episode)">第{{ episode["话"] }}话</button> 
                     </div>
                 </div>
             </div>
@@ -127,7 +125,7 @@
             index: index,
         },
         methods: {
-            show: function(item){
+            showMenu: function(item){
                 // console.log(item)
                 this.loadSource(item.contributor, function(){
                     item.episode = searchResult.getSource(item.contributor)
@@ -138,7 +136,7 @@
             },
             loadSource: function(contributorList, callback){
                 // 加载文件，加载结束后进行回调
-                contributorList = contributorList.filter(x => source[x] === emptyList)
+                contributorList = contributorList.filter(x => !source[x])
                 if (contributorList.length === 0){
                     callback()
                     return
@@ -150,7 +148,7 @@
                     headElement.appendChild(scriptElement)
                 }
                 let check = setInterval(function(){
-                    contributorList = contributorList.filter(x => source[x] === emptyList)
+                    contributorList = contributorList.filter(x => !source[x])
                     if (contributorList.length === 0){
                         clearInterval(check)
                         callback()
@@ -158,7 +156,12 @@
                 }, 200)
             },
             getSource: function(contributor){
-                return [1,2,3]
+                return [{"话":"1", "页":["page1", "page2"]},
+                        {"话":"2", "页":["page1", "page2"]},
+                        {"话":"3", "页":["page1", "page2"]},]
+            },
+            loadPage: function(episode){
+                console.log(episode)
             }
         },
     })
