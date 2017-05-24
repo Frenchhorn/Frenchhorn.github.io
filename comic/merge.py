@@ -83,7 +83,7 @@ def validFileTime(fileList):
 
 
 def validFile(fileList):
-    pass
+    return fileList
 
 
 def insertDataBase(fileList):
