@@ -1,6 +1,5 @@
 import os.path
-import datetime
-from db import db
+from db import db, DATABASE, File
 
 
 def validFileTime(fileList):
@@ -25,13 +24,8 @@ def main():
     assert os.path.isfile(DATABASE), '双击db.py初始化数据库'
     db.connect()
     try:
-        if 'source' in os.listdir() and os.path.isdir('source'):
-            fileList = os.listdir('source')
-        else:
-            print("Can't find folder source")
-            db.close()
-            return False
-
+        assert not ('source' in os.listdir()), '目录source不存在'
+        fileList = os.listdir('source')
         fileList = validFileTime(fileList)
         fileList = validFile(fileList)
         insertDataBase(fileList)
