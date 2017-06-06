@@ -15,7 +15,7 @@ class BaseModel(peewee.Model):
 class Comic(BaseModel):
     comicID = peewee.IntegerField(unique=True)
     name = peewee.CharField()
-    author = peewee.CharField(default='unknown')
+    author = peewee.CharField(null=True)
 
     # @staticmethod
     # def searchByName(name):
@@ -38,7 +38,7 @@ class Comic(BaseModel):
 
 class Episode(BaseModel):
     comic = peewee.ForeignKeyField(Comic, related_name='comic_episode')
-    vol = peewee.IntegerField(null=True)
+    vol = peewee.FloatField(null=True)
     episode = peewee.FloatField(null=True)
     special = peewee.CharField(null=True)
     # contributor = peewee.CharField()
@@ -57,10 +57,13 @@ def initDatabase():
 
 
 def test():
-    Comic.create(comicID=1, name='1')
-    Comic.create(comicID=2, name='12')
-    c = Comic.create(comicID=3, name='123')
-    Episode.create(comic=c, contributor='test')
+    Comic.create(comicID=1, name='东方铃奈庵', author='春河もえ/zun')
+    Comic.create(comicID=2, name='四叶妹妹')
+    comic3 = Comic.create(comicID=3, name='迷你偶像', author='明音')
+    vol1 = Episode.create(comic=comic3, vol=1)
+    Episode.create(comic=comic3, episode=1.5)
+    Episode.create(comic=comic3, special='1.5')
+    Page.create(episode=vol1, page=1, url='迷你偶像 卷1 页1')
 
 
 if __name__ == '__main__':

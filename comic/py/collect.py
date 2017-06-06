@@ -15,12 +15,11 @@ from db import db, DATABASE
 def readFile(fileList):
     fileDict = {}
     for i in fileList:
-        with open(i, 'rb') as f:
-            file = os.path.basename(i)
+        with open('../source/'+i, 'rb') as f:
             comic = f.read()
             comic = comic.decode()
             comic = json.loads(comic)
-            fileDict[file] = comic
+            fileDict[i] = comic
     return fileDict
 
 
@@ -32,7 +31,7 @@ def main():
     assert os.path.isfile(DATABASE), '双击db.py初始化数据库'
     db.connect()
     try:
-        assert not ('source' in os.listdir('..')), '目录source不存在'
+        assert 'source' in os.listdir('..'), 'comic下不存在source文件夹'
         fileList = os.listdir(os.path.join('..', 'source'))
         # fileList = validFileTime(fileList)
         fileDict = readFile(fileList)
@@ -42,4 +41,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    #main()
+    pass
