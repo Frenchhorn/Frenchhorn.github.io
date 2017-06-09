@@ -17,60 +17,53 @@ class Comic(BaseModel):
     name = peewee.CharField()
     author = peewee.CharField(null=True)
 
-    @staticmethod
-    def returnComic(comicID):
-        comicID = int(comicID)
-        query = Comic.select().where(Comic.comicID == comicID)
-        if len(query) == 0:
-            return None
-        else:
-            return query.get()
-
-    @staticmethod
-    def createComic(comicID, name, author):
-        return Comic.create(comicID=comicID, name=name, author=author)
-
 
 class Episode(BaseModel):
     comic = peewee.ForeignKeyField(Comic, related_name='comic_episode')
     vol = peewee.IntegerField(null=True)
     episode = peewee.FloatField(null=True)
     special = peewee.CharField(null=True)
-    contributor = peewee.CharField()
-
-    @staticmethod
-    def returnEpisode(comicObj, vol=None, episode=None, special=None):
-        if vol:
-            vol = int(vol)
-            query = Episode.select().where((Episode.comic==comicObj) & (Episode.vol==vol))
-        elif episode:
-            episode = float(episode)
-            query = Episode.select().where((Episode.comic==comicObj) & (Episode.episode==episode))
-        elif special:
-            special = str(special)
-            query = Episode.select().where((Episode.comic==comicObj) & (Episode.special==special))
-
-        if len(query) == 0:
-            return None
-        else:
-            return query.get()
-
-    @staticmethod
-    def createEpisode(comicObj, contributor, vol=None, episode=None, special=None):
-        if vol:
-            vol = int(vol)
-            return Episode.create(comic=comicObj, contributor=contributor, vol=vol)
-        elif episode:
-            episode = float(episode)
-            return Episode.create(comic=comicObj, contributor=contributor, episode=episode)
-        elif special:
-            return Episode.create(comic=comicObj, contributor=contributor, special=special)
 
 
 class Page(BaseModel):
     episode = peewee.ForeignKeyField(Episode, related_name='episode_page')
     page = peewee.IntegerField()
     url = peewee.CharField()
+
+
+def updateComic(comic, fileName):
+    query = Comic.select().where(Comic.comicID == comic.get('编号'))
+    comicObj = query.get() if (len(query) != 0) else Comic.create(comicID=comic.get('编号'), name=comic.get('名称'), author=comic.get('作者'))
+    updateEpisode(comic, comicObj)
+
+
+def updateEpisode(comic, comicObj):
+    vols = comic.get('卷')
+    episodes = comic.get('话')
+    specials = comic.get('番外')
+    for index, itemDict in enumerate([vols, episodes, specials]):
+        if not itemDict:
+            continue
+        for item, pages in itemDict.items():
+            if index == 0:
+                vol = int(item)
+                query = Episode.select().where((Episode.comic==comicObj) & (Episode.vol==vol))
+                episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, vol=vol)
+            elif index == 1:
+                episode = float(item)
+                query = Episode.select().where((Episode.comic==comicObj) & (Episode.episode==episode))
+                episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, episode=episode)
+            elif index == 2:
+                special = str(item)
+                query = Episode.select().where((Episode.comic==comicObj) & (Episode.special==special))
+                episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, special=special)
+
+            updatePage(episodeObj, pages)
+
+
+def updatePage(episodeObj, pages):
+    for index, value in enumerate(pages):
+        Page.create(episode=episodeObj, page=index+1, url=value)
 
 
 def initDatabase():
@@ -83,9 +76,9 @@ def test():
     Comic.create(comicID=1, name='东方铃奈庵', author='春河もえ/zun')
     Comic.create(comicID=2, name='四叶妹妹')
     comic3 = Comic.create(comicID=3, name='迷你偶像', author='明音')
-    vol1 = Episode.create(comic=comic3, vol=1, contributor='kosuzu')
-    Episode.create(comic=comic3, episode=1.5, contributor='kosuzu')
-    Episode.create(comic=comic3, special='1.5', contributor='kosuzu')
+    vol1 = Episode.create(comic=comic3, vol=1)
+    Episode.create(comic=comic3, episode=1.5)
+    Episode.create(comic=comic3, special='1.5')
     Page.create(episode=vol1, page=1, url='迷你偶像 卷1 页1')
 
 
