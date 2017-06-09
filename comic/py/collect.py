@@ -1,18 +1,9 @@
 import os
 import json
-from db import db, DATABASE, Comic
+from db import db, DATABASE, Comic, Episode, Page
 
 
-# def validFileTime(fileList):
-#     newFileList = []
-#     for file in fileList:
-#         if not fileDate or fileDate == os.path.getmtime('source/' + file):
-#             continue
-#         newFileList.append(file)
-#     return newFileList
-
-
-def readFile(fileList):
+def readJsonFile(fileList):
     fileDict = {}
     for i in fileList:
         with open('../source/'+i, 'rb') as f:
@@ -35,28 +26,29 @@ def updateEpisode(comic, comicObj, contributor):
     vols = comic.get('卷')
     episodes = comic.get('话')
     specials = comic.get('番外')
-    if not vols:
+    if vols:
         for vol, pages in vols.items():
             episodeObj = Episode.returnEpisode(comicObj, vol=vol)
             if not episodeObj:
                 episodeObj = Episode.createEpisode(comicObj, contributor, vol=vol)
             updatePage(episodeObj, pages)
-    if not episodes:
+    if episodes:
         for episode, pages in episodes.items():
             episodeObj = Episode.returnEpisode(comicObj, episode=episode)
             if not episodeObj:
                 episodeObj = Episode.createEpisode(comicObj, contributor, episode=episode)
             updatePage(episodeObj, pages)
-    if not specials:
-        for special, pages in item.items():
+    if specials:
+        for special, pages in specials.items():
             episodeObj = Episode.returnEpisode(comicObj, special=special)
             if not episodeObj:
                 episodeObj = Episode.createEpisode(comicObj, contributor, special=special)
             updatePage(episodeObj, pages)
 
 
-def updatePage():
-    pass
+def updatePage(episodeObj, pages):
+    for index, value in enumerate(pages):
+        Page.create(episode=episodeObj, page=index+1, url=value)
 
 
 def insertDataBase(fileDict):
@@ -65,19 +57,20 @@ def insertDataBase(fileDict):
             updateComic(comic, fileName)
 
 
-def main():
-    assert os.path.isfile(DATABASE), '双击db.py初始化数据库'
+def initDatabase():
     db.connect()
-    try:
-        assert 'source' in os.listdir('..'), 'comic下不存在source文件夹'
-        fileList = os.listdir(os.path.join('..', 'source'))
-        # fileList = validFileTime(fileList)
-        fileDict = readFile(fileList)
-        insertDataBase(fileDict)
-    finally:
-        db.close()
+    db.create_tables([Comic, Episode, Page])
+    db.close()
+
+
+def main():
+    if not os.path.isfile(DATABASE):
+        initDatabase()
+    assert 'source' in os.listdir('..'), 'comic下不存在source文件夹'
+    fileList = os.listdir(os.path.join('..', 'source'))
+    fileDict = readJsonFile(fileList)
+    insertDataBase(fileDict)
 
 
 if __name__ == '__main__':
-    #main()
-    pass
+    main()

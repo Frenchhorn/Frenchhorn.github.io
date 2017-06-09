@@ -30,24 +30,6 @@ class Comic(BaseModel):
     def createComic(comicID, name, author):
         return Comic.create(comicID=comicID, name=name, author=author)
 
-    # @staticmethod
-    # def searchByName(name):
-    #     return Comic.select().where(Comic.name.contains(name))
-
-    # @staticmethod
-    # def searchByAuthor(author):
-    #     return Comic.select().where(Comic.author.contains(author))
-
-    # @staticmethod
-    # def searchByLocation(location):
-    #     return Comic.select().where(Comic.location.contains(location))
-
-    # @staticmethod
-    # def searchByAll(word):
-    #     return Comic.select().where(Comic.name.contains(word) |
-    #                                 Comic.author.contains(word) |
-    #                                 Comic.location.contains(word))
-
 
 class Episode(BaseModel):
     comic = peewee.ForeignKeyField(Comic, related_name='comic_episode')
@@ -60,12 +42,13 @@ class Episode(BaseModel):
     def returnEpisode(comicObj, vol=None, episode=None, special=None):
         if vol:
             vol = int(vol)
-            query = Episode.select().where(Episode.comic == comicObj & Episode.vol == vol)
+            query = Episode.select().where((Episode.comic==comicObj) & (Episode.vol==vol))
         elif episode:
             episode = float(episode)
-            query = Episode.select().where(Episode.comic == comicObj & Episode.episode == episode)
+            query = Episode.select().where((Episode.comic==comicObj) & (Episode.episode==episode))
         elif special:
-            query = Episode.select().where(Episode.comic == comicObj & Episode.special == special)
+            special = str(special)
+            query = Episode.select().where((Episode.comic==comicObj) & (Episode.special==special))
 
         if len(query) == 0:
             return None
