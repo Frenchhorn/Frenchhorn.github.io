@@ -1,5 +1,4 @@
 import os.path
-import datetime
 import peewee
 
 DATABASE = os.path.join('..', 'comic.db')
@@ -7,6 +6,7 @@ DATABASE = os.path.join('..', 'comic.db')
 db = peewee.SqliteDatabase(DATABASE)
 
 
+# define tables
 class BaseModel(peewee.Model):
     class Meta:
         database = db
@@ -31,6 +31,7 @@ class Page(BaseModel):
     url = peewee.CharField()
 
 
+# for collect.py
 def updateComic(comic):
     query = Comic.select().where(Comic.comicID == comic.get('编号'))
     comicObj = query.get() if (len(query) != 0) else Comic.create(comicID=comic.get('编号'), name=comic.get('名称'), author=comic.get('作者'))
@@ -66,12 +67,30 @@ def updatePage(episodeObj, pages):
         Page.create(episode=episodeObj, page=index+1, url=value)
 
 
+# for generate.py
+def getIndex():
+    index = []
+    comicIterator = Comic.select().order_by(Comic.comicID)
+    for comicObj in comicIterator:
+        comicIndex = {}
+        comicIndex['number'] = comicObj.comicID
+        comicIndex['name'] = comicObj.name
+        comicIndex['author'] = comicObj.author
+        comicIndex['vol'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.vol != None)))
+        comicIndex['episode'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.episode != None)))
+        comicIndex['special'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.special != None)))
+        index.append(comicIndex)
+    return index
+
+
+# create database
 def initDatabase():
     db.connect()
     db.create_tables([Comic, Episode, Page])
     db.close()
 
 
+# simple test
 def test():
     Comic.create(comicID=1, name='东方铃奈庵', author='春河もえ/zun')
     Comic.create(comicID=2, name='四叶妹妹')

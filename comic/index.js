@@ -1,24 +1,26 @@
-var index = 
-[
-{
-    "number":1,
-    "comic":"东方铃奈庵",
-    "author":"春河もえ/zun",
-    "contributor":["kosuzu"],
-},{
-    "number":2,
-    "comic":"四叶妹妹",
-    "author":"东清彦",
-    "contributor":["kosuzu"],
-},{
-    "number":3,
-    "comic":"迷你偶像",
-    "author":"明音",
-    "contributor":["kosuzu", "test"],
-},{
-    "number":4,
-    "comic":"东方三月精",
-    "author":"比良坂真琴/zun",
-    "contributor":["kosuzu", "test"],
-}
+var index = [
+  {
+    "vol": 2,
+    "episode": 2,
+    "special": 2,
+    "author": "春河もえ/zun",
+    "name": "东方铃奈庵",
+    "number": 1
+  },
+  {
+    "vol": 2,
+    "episode": 2,
+    "special": 0,
+    "author": "东清彦",
+    "name": "四叶妹妹",
+    "number": 2
+  },
+  {
+    "vol": 2,
+    "episode": 2,
+    "special": 0,
+    "author": "明音",
+    "name": "迷你偶像",
+    "number": 3
+  }
 ]
