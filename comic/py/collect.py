@@ -2,11 +2,12 @@ import os
 import json
 import db
 
+COLLECT_FOLDER = os.path.join('..', 'collect')
 
-def readJsonFile(fileList, fileFolder):
+def readJsonFile(fileList):
     fileDict = {}
     for fileName in fileList:
-        filePath = os.path.join(fileFolder,fileName)
+        filePath = os.path.join(COLLECT_FOLDER,fileName)
         with open(filePath, 'rb') as f:
             comic = f.read()
             comic = comic.decode()
@@ -15,7 +16,7 @@ def readJsonFile(fileList, fileFolder):
     return fileDict
 
 
-def insertDataBase(fileDict):
+def insertToDataBase(fileDict):
     for fileName, value in fileDict.items():
         for comic in value:
             db.updateComic(comic)
@@ -24,11 +25,10 @@ def insertDataBase(fileDict):
 def main():
     if not os.path.isfile(db.DATABASE):
         db.initDatabase()
-    assert 'collect' in os.listdir('..'), 'comic下不存在collect文件夹'
-    fileFolder = os.path.join('..', 'collect')
-    fileList = os.listdir(fileFolder)
-    fileDict = readJsonFile(fileList, fileFolder)
-    insertDataBase(fileDict)
+    assert os.path.isdir(COLLECT_FOLDER), 'comic下不存在collect文件夹'
+    fileList = os.listdir(COLLECT_FOLDER)
+    fileDict = readJsonFile(fileList)
+    insertToDataBase(fileDict)
 
 
 if __name__ == '__main__':
