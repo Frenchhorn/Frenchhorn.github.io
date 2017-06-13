@@ -1,5 +1,6 @@
 import os.path
 import peewee
+from collections import OrderedDict
 
 DATABASE = os.path.join('..', 'comic.db')
 
@@ -72,7 +73,7 @@ def getIndex():
     index = []
     comicIterator = Comic.select().order_by(Comic.comicID)
     for comicObj in comicIterator:
-        comicIndex = {}
+        comicIndex = OrderedDict()
         comicIndex['number'] = comicObj.comicID
         comicIndex['name'] = comicObj.name
         comicIndex['author'] = comicObj.author

@@ -1,26 +1,26 @@
 var index = [
   {
-    "vol": 2,
-    "episode": 2,
-    "special": 2,
-    "author": "春河もえ/zun",
+    "number": 1,
     "name": "东方铃奈庵",
-    "number": 1
-  },
-  {
+    "author": "春河もえ/zun",
     "vol": 2,
     "episode": 2,
-    "special": 0,
-    "author": "东清彦",
+    "special": 2
+  },
+  {
+    "number": 2,
     "name": "四叶妹妹",
-    "number": 2
-  },
-  {
+    "author": "东清彦",
     "vol": 2,
     "episode": 2,
-    "special": 0,
-    "author": "明音",
+    "special": 0
+  },
+  {
+    "number": 3,
     "name": "迷你偶像",
-    "number": 3
+    "author": "明音",
+    "vol": 2,
+    "episode": 2,
+    "special": 0
   }
 ]
