@@ -3,14 +3,15 @@ import json
 import db
 
 
-def readJsonFile(fileList):
+def readJsonFile(fileList, fileFolder):
     fileDict = {}
-    for i in fileList:
-        with open('../source/'+i, 'rb') as f:
+    for fileName in fileList:
+        filePath = os.path.join(fileFolder,fileName)
+        with open(filePath, 'rb') as f:
             comic = f.read()
             comic = comic.decode()
             comic = json.loads(comic)
-            fileDict[i] = comic
+            fileDict[fileName] = comic
     return fileDict
 
 
@@ -23,9 +24,10 @@ def insertDataBase(fileDict):
 def main():
     if not os.path.isfile(db.DATABASE):
         db.initDatabase()
-    assert 'source' in os.listdir('..'), 'comic下不存在source文件夹'
-    fileList = os.listdir(os.path.join('..', 'source'))
-    fileDict = readJsonFile(fileList)
+    assert 'collect' in os.listdir('..'), 'comic下不存在collect文件夹'
+    fileFolder = os.path.join('..', 'collect')
+    fileList = os.listdir(fileFolder)
+    fileDict = readJsonFile(fileList, fileFolder)
     insertDataBase(fileDict)
 
 
