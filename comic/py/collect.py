@@ -17,7 +17,7 @@ def readJsonFile(fileList):
 def insertDataBase(fileDict):
     for fileName, value in fileDict.items():
         for comic in value:
-            db.updateComic(comic, fileName)
+            db.updateComic(comic)
 
 
 def main():

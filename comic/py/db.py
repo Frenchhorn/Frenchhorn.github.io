@@ -31,7 +31,7 @@ class Page(BaseModel):
     url = peewee.CharField()
 
 
-def updateComic(comic, fileName):
+def updateComic(comic):
     query = Comic.select().where(Comic.comicID == comic.get('编号'))
     comicObj = query.get() if (len(query) != 0) else Comic.create(comicID=comic.get('编号'), name=comic.get('名称'), author=comic.get('作者'))
     updateEpisode(comic, comicObj)
