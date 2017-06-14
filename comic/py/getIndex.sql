@@ -1,6 +1,7 @@
 select
-  comic.name,
   comic.comicID,
+  comic.name,
+  comic.author,
   count(episode.vol),
   count(episode.episode),
   count(episode.special)
