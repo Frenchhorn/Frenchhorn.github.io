@@ -8,10 +8,9 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="index.js"></script>
     <script>
-        var source = {}
-        var emptyList = []
-        for (item of index){
-            item.episode = emptyList
+        var extLink = {}
+        for (let i=1; i<index.length+1; i++){
+            extLink[i] = null
         }
     </script>
     <style type="text/css">
@@ -39,17 +38,25 @@
         </div>
         <div class="row" id="searchResult" v-if="seen">
             <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-info" v-for="item in index" v-bind:number="item.number" v-bind:comic="item.comic" v-bind:author="item.author" v-bind:contributor="item.contributor">
+                <div class="panel panel-info" v-for="item in index" v-bind:number="item['编号']" v-bind:comic="item['名称']" v-bind:author="item['作者']">
                     <div class="panel-heading">
-                        <h3 class="panel-title">{{ item.comic }}</h3>
+                        <h3 class="panel-title">{{ item['名称'] }}</h3>
                     </div>
                     <div class="panel-body">
-                        <span>作者：{{ item.author }}</span>
+                        <span>作者：{{ item['作者'] }}</span>
                         <button type="button" class="btn btn-default btn-sm pull-right" v-on:click="showMenu(item)">
                             <span class="glyphicon glyphicon-plus"></span> 目录
                         </button>
                         <br><br>
-                        <button type="button" class="btn btn-default btn-md" v-for="episode in item.episode" v-on:click="loadPage(episode)">第{{ episode["话"] }}话</button> 
+                        <div v-if="item['卷'] !== 0">
+                            <button type="button" class="btn btn-default btn-md" v-for="vol in item['卷']" v-on:click="loadPage(item['编号'], vol)">第{{ vol }}卷</button> 
+                        </div>
+                        <div v-if="item['话'] !== 0">
+                            <button type="button" class="btn btn-default btn-md" v-for="episode in item['话']" v-on:click="loadPage(item['编号'], null, episode)">第{{ episode }}话</button>
+                        </div>
+                        <div v-if="item['番外'] !== 0">
+                            <button type="button" class="btn btn-default btn-md" v-for="special in item['番外']" v-on:click="loadPage(item['编号'], null, null, special)">{{ special }}</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -57,114 +64,83 @@
     </div>
 </body>
 <script>
-    var searchBar = new Vue({
-        el: '#searchBar',
-        data: {
-            seen: true,
-            value: '',
-            searchArgs: {
-                pattern: /[`~\!@$%\^&\*\(\)\-\+\=\{\}\[\]\\\|;\:'",<\.>\/\? ]/g,
-                finish: true,
-                over500ms: true,
-                temp: {word: '', type: ''},
-                searchTypeList: ['全部', '名称', '作者'],
-                searchType: '全部',
-            },
+var searchBar = new Vue({
+    el: '#searchBar',
+    data: {
+        seen: true,
+        value: '',
+        searchArgs: {
+            pattern: /[`~\!@$%\^&\*\(\)\-\+\=\{\}\[\]\\\|;\:'",<\.>\/\? ]/g,
+            finish: true,
+            over500ms: true,
+            temp: {word: '', type: ''},
+            searchTypeList: ['全部', '名称', '作者'],
+            searchType: '全部',
         },
-        methods: {
-            search: function(){
-                if (!this.searchArgs.finish || !this.searchArgs.over500ms){
-                    return false
+    },
+    methods: {
+        search: function(){
+            if (!this.searchArgs.finish || !this.searchArgs.over500ms){
+                return false
+            }
+            this.searchArgs.finish = false
+            this.searchArgs.over500ms = false
+            setTimeout("searchBar.over500ms()", 500)
+            this.searchArgs.temp['word'] = this.value
+            this.searchArgs.temp['type'] = this.searchArgs.searchType
+            $('#searchResult [comic]').hide()
+            var value = this.value.replace(this.searchArgs.pattern, '')
+            if (value){
+                if (this.searchArgs.searchType === '全部' || this.searchArgs.searchType === '名称'){
+                    $('#searchResult [comic*=' + value + ']').show()
                 }
-                this.searchArgs.finish = false
-                this.searchArgs.over500ms = false
-                setTimeout("searchBar.over500ms()", 500)
-                this.searchArgs.temp['word'] = this.value
-                this.searchArgs.temp['type'] = this.searchArgs.searchType
-                $('#searchResult [comic]').hide()
-                var value = this.value.replace(this.searchArgs.pattern, '')
-                if (value){
-                    if (this.searchArgs.searchType === '全部' || this.searchArgs.searchType === '名称'){
-                        $('#searchResult [comic*=' + value + ']').show()
-                    }
-                    if (this.searchArgs.searchType === '全部' || this.searchArgs.searchType === '作者'){
-                        $('#searchResult [author*=' + value + ']').show()
-                    }
-                    // if (this.searchArgs.searchType === '全部' || this.searchArgs.searchType === '编号'){
-                    //     $('#searchResult [number=' + value + ']').show()
-                    // }
-                    //$('#searchResult [contributor*=' + value + ']').show()
+                if (this.searchArgs.searchType === '全部' || this.searchArgs.searchType === '作者'){
+                    $('#searchResult [author*=' + value + ']').show()
                 }
-                this.searchArgs.finish = true
-                if (this.searchArgs.over500ms && (this.searchArgs.temp['word'] !== this.value || this.searchArgs.temp['type'] !== this.searchArgs.searchType)){
-                    this.search()
-                }
-            },
-            over500ms: function(){
-                this.searchArgs.over500ms = true
-                if (this.searchArgs.finish && (this.searchArgs.temp['word'] !== this.value || this.searchArgs.temp['type'] !== this.searchArgs.searchType)){
-                    this.search()
-                }
-            },
-            changeSearchType: function(){
-                var index = this.searchArgs.searchTypeList.indexOf(this.searchArgs.searchType)
-                if (index+1 !== this.searchArgs.searchTypeList.length){
-                    this.searchArgs.searchType = this.searchArgs.searchTypeList[index+1]
-                }else{
-                    this.searchArgs.searchType = this.searchArgs.searchTypeList[0]
-                }
+            }
+            this.searchArgs.finish = true
+            if (this.searchArgs.over500ms && (this.searchArgs.temp['word'] !== this.value || this.searchArgs.temp['type'] !== this.searchArgs.searchType)){
                 this.search()
-            },
-        }
-    })
-
-    var searchResult = new Vue({
-        el: '#searchResult',
-        data: {
-            seen: true,
-            index: index,
-        },
-        methods: {
-            showMenu: function(item){
-                // console.log(item)
-                this.loadSource(item.contributor, function(){
-                    item.episode = searchResult.getSource(item.contributor)
-                    Vue.nextTick(function(){
-                        $('#searchResult [number=' + item.number + '] button.btn-md').show()
-                    })
-                })
-            },
-            loadSource: function(contributorList, callback){
-                // 加载文件，加载结束后进行回调
-                contributorList = contributorList.filter(x => !source[x])
-                if (contributorList.length === 0){
-                    callback()
-                    return
-                }
-                let headElement = document.getElementsByTagName("head")[0]
-                for (contributor of contributorList){
-                    let scriptElement = document.createElement("script")
-                    scriptElement.src = 'source/' + contributor + '.js'
-                    headElement.appendChild(scriptElement)
-                }
-                let check = setInterval(function(){
-                    contributorList = contributorList.filter(x => !source[x])
-                    if (contributorList.length === 0){
-                        clearInterval(check)
-                        callback()
-                    }
-                }, 200)
-            },
-            getSource: function(contributor){
-                return [{"话":"1", "页":["page1", "page2"]},
-                        {"话":"2", "页":["page1", "page2"]},
-                        {"话":"3", "页":["page1", "page2"]},]
-            },
-            loadPage: function(episode){
-                console.log(episode)
             }
         },
-    })
+        over500ms: function(){
+            this.searchArgs.over500ms = true
+            if (this.searchArgs.finish && (this.searchArgs.temp['word'] !== this.value || this.searchArgs.temp['type'] !== this.searchArgs.searchType)){
+                this.search()
+            }
+        },
+        changeSearchType: function(){
+            this.searchArgs.searchTypeList.push(this.searchArgs.searchTypeList.shift())
+            this.searchArgs.searchType = this.searchArgs.searchTypeList[0]
+            this.search()
+        },
+    }
+})
+
+var searchResult = new Vue({
+    el: '#searchResult',
+    data: {
+        seen: true,
+        index: index,
+        extLink: extLink
+    },
+    methods: {
+        showMenu: function(item){
+            // console.log(item)
+            let headElement = document.getElementsByTagName("head")[0]
+            let scriptElement = document.createElement("script")
+            scriptElement.src = 'generate/' + item['编号'] + '.js'
+            headElement.appendChild(scriptElement)
+            // Vue.nextTick(function(){
+            //     $('#searchResult [number=' + item.number + '] button.btn-md').show()
+            // })
+            $('#searchResult [number=' + item['编号'] + '] button.btn-md').show()
+        },
+        loadPage: function(num, vol, episode, special){
+            console.log(num, vol, episode, special)
+        }
+    },
+})
 
 </script>
 </html>

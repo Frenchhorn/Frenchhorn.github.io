@@ -74,12 +74,12 @@ def getIndex():
     comicIterator = Comic.select().order_by(Comic.comicID)
     for comicObj in comicIterator:
         comicIndex = OrderedDict()
-        comicIndex['number'] = comicObj.comicID
-        comicIndex['name'] = comicObj.name
-        comicIndex['author'] = comicObj.author
-        comicIndex['vol'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.vol != None)))
-        comicIndex['episode'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.episode != None)))
-        comicIndex['special'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.special != None)))
+        comicIndex['编号'] = comicObj.comicID
+        comicIndex['名称'] = comicObj.name
+        comicIndex['作者'] = comicObj.author
+        comicIndex['卷'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.vol != None)))
+        comicIndex['话'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.episode != None)))
+        comicIndex['番外'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.special != None)))
         index.append(comicIndex)
     return index
 
