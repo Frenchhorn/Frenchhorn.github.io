@@ -5,14 +5,19 @@ import db
 GENERATE_FOLDER = os.path.join('..', 'generate')
 
 def generateIndex(comicIndex):
-    indexStr = 'var index = ' + json.dumps(comicIndex, ensure_ascii=False, indent=2)
+    indexStr = 'var index = \n' + json.dumps(comicIndex, ensure_ascii=False, indent=2)
     with open(os.path.join('..', 'index.js'), 'w', encoding='utf8') as indexFile:
         indexFile.write(indexStr)
 
 
 def generateComic(comicIndex):
-    test = comicIndex[0]
-    pass
+    for comic in comicIndex:
+        if comic['卷'] + comic['话'] + comic['番外'] == 0:
+            continue
+        comicPage = db.getComic(comic)
+        comicStr = 'extLink[' + str(comic['编号']) + '] = \n' + json.dumps(comicPage, ensure_ascii=False, indent=2)
+        with open(os.path.join(GENERATE_FOLDER, str(comic['编号']) + '.js'), 'w', encoding='utf8') as comicFile:
+            comicFile.write(comicStr)
 
 
 def main():
@@ -20,7 +25,7 @@ def main():
     if not os.path.isdir(GENERATE_FOLDER):
         os.mkdir(GENERATE_FOLDER)
     comicIndex = db.getIndex()
-    #generateIndex(comicIndex)
+    generateIndex(comicIndex)
     generateComic(comicIndex)
 
 

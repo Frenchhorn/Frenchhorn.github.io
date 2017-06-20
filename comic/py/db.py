@@ -49,16 +49,19 @@ def updateEpisode(comic, comicObj):
         for item, pages in itemDict.items():
             if index == 0:
                 vol = int(item)
-                query = Episode.select().where((Episode.comic==comicObj) & (Episode.vol==vol))
-                episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, vol=vol)
+                # query = Episode.select().where((Episode.comic==comicObj) & (Episode.vol==vol))
+                # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, vol=vol)
+                episodeObj = Episode.create(comic=comicObj, vol=vol)
             elif index == 1:
                 episode = float(item)
-                query = Episode.select().where((Episode.comic==comicObj) & (Episode.episode==episode))
-                episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, episode=episode)
+                # query = Episode.select().where((Episode.comic==comicObj) & (Episode.episode==episode))
+                # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, episode=episode)
+                episodeObj = Episode.create(comic=comicObj, episode=episode)
             elif index == 2:
                 special = str(item)
-                query = Episode.select().where((Episode.comic==comicObj) & (Episode.special==special))
-                episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, special=special)
+                # query = Episode.select().where((Episode.comic==comicObj) & (Episode.special==special))
+                # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, special=special)
+                episodeObj = Episode.create(comic=comicObj, special=special)
 
             updatePage(episodeObj, pages)
 
@@ -82,6 +85,40 @@ def getIndex():
         comicIndex['番外'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.special != None)))
         index.append(comicIndex)
     return index
+
+
+def getComic(comic):
+    comic['卷'] = OrderedDict()
+    comic['话'] = OrderedDict()
+    comic['番外'] = OrderedDict()
+    comicObj = Comic.get(comicID=comic['编号'])
+    episodeIterator = Episode.select().where(Episode.comic==comicObj).order_by(Episode.special, Episode.episode, Episode.vol)
+    for episodeObj in episodeIterator:
+        if episodeObj.vol:
+            if not comic['卷'].get(episodeObj.vol):
+                comic['卷'][episodeObj.vol] = []
+            pageList = []
+            pageObjs = Page.select().where(Page.episode==episodeObj).order_by(Page.page)
+            for pageObj in pageObjs:
+                pageList.append(pageObj.url)
+            comic['卷'][episodeObj.vol].append(pageList)
+        elif episodeObj.episode:
+            if not comic['话'].get(episodeObj.episode):
+                comic['话'][episodeObj.episode] = []
+            pageList = []
+            pageObjs = Page.select().where(Page.episode==episodeObj).order_by(Page.page)
+            for pageObj in pageObjs:
+                pageList.append(pageObj.url)
+            comic['话'][episodeObj.episode].append(pageList)
+        elif episodeObj.special:
+            if not comic['番外'].get(episodeObj.special):
+                comic['番外'][episodeObj.special] = []
+            pageList = []
+            pageObjs = Page.select().where(Page.episode==episodeObj).order_by(Page.page)
+            for pageObj in pageObjs:
+                pageList.append(pageObj.url)
+            comic['番外'][episodeObj.special].append(pageList)
+    return comic
 
 
 # create database

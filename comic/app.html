@@ -9,9 +9,9 @@
     <script type="text/javascript" src="index.js"></script>
     <script>
         var extLink = {}
-        for (let i=1; i<index.length+1; i++){
-            extLink[i] = null
-        }
+        // for (let i=1; i<index.length+1; i++){
+        //     extLink[i] = null
+        // }
     </script>
     <style type="text/css">
         #searchResult .panel-info{
@@ -48,7 +48,7 @@
                             <span class="glyphicon glyphicon-plus"></span> 目录
                         </button>
                         <br><br>
-                        <div v-if="item['卷'] !== 0">
+<!--                         <div v-if="item['卷'] !== 0">
                             <button type="button" class="btn btn-default btn-md" v-for="vol in item['卷']" v-on:click="loadPage(item['编号'], vol)">第{{ vol }}卷</button> 
                         </div>
                         <div v-if="item['话'] !== 0">
@@ -56,7 +56,7 @@
                         </div>
                         <div v-if="item['番外'] !== 0">
                             <button type="button" class="btn btn-default btn-md" v-for="special in item['番外']" v-on:click="loadPage(item['编号'], null, null, special)">{{ special }}</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -122,19 +122,25 @@ var searchResult = new Vue({
     data: {
         seen: true,
         index: index,
-        extLink: extLink
+        // extLink: extLink,
     },
     methods: {
         showMenu: function(item){
-            // console.log(item)
+            if (extLink[item['编号']]){
+                console.log('have loaded file')
+                return false
+            }
             let headElement = document.getElementsByTagName("head")[0]
             let scriptElement = document.createElement("script")
             scriptElement.src = 'generate/' + item['编号'] + '.js'
+            scriptElement.onload = function(){
+                console.log(extLink[item['编号']]['作者'])
+                // Vue.nextTick(function(){
+                $('#searchResult [number=' + item['编号'] + '] button.btn-md').show()
+                // })
+            }
             headElement.appendChild(scriptElement)
-            // Vue.nextTick(function(){
-            //     $('#searchResult [number=' + item.number + '] button.btn-md').show()
-            // })
-            $('#searchResult [number=' + item['编号'] + '] button.btn-md').show()
+            
         },
         loadPage: function(num, vol, episode, special){
             console.log(num, vol, episode, special)
