@@ -20,7 +20,6 @@
         #searchResult .panel-body button.btn-md{
             margin-right: 5px; 
             margin-top: 5px;
-            display: none;
         }
     </style>
 </head>
@@ -48,7 +47,8 @@
                             <span class="glyphicon glyphicon-plus"></span> 目录
                         </button>
                         <br><br>
-<!--                         <div v-if="item['卷'] !== 0">
+                        <!--
+                        <div v-if="item['卷'] !== 0">
                             <button type="button" class="btn btn-default btn-md" v-for="vol in item['卷']" v-on:click="loadPage(item['编号'], vol)">第{{ vol }}卷</button> 
                         </div>
                         <div v-if="item['话'] !== 0">
@@ -56,7 +56,11 @@
                         </div>
                         <div v-if="item['番外'] !== 0">
                             <button type="button" class="btn btn-default btn-md" v-for="special in item['番外']" v-on:click="loadPage(item['编号'], null, null, special)">{{ special }}</button>
-                        </div> -->
+                        </div>
+                        -->
+                        <div menu="vol"></div>
+                        <div menu="episode"></div>
+                        <div menu="special"></div>
                     </div>
                 </div>
             </div>
@@ -134,13 +138,31 @@ var searchResult = new Vue({
             let scriptElement = document.createElement("script")
             scriptElement.src = 'generate/' + item['编号'] + '.js'
             scriptElement.onload = function(){
-                console.log(extLink[item['编号']]['作者'])
-                // Vue.nextTick(function(){
-                $('#searchResult [number=' + item['编号'] + '] button.btn-md').show()
-                // })
+                let comicObject = extLink[item['编号']]
+                console.log(comicObject)
+                if (!$.isEmptyObject(comicObject['卷'])){
+                    // console.log(1)
+                    let vol = $('[number='+item['编号']+'] [menu=vol]')
+                    for (let i in comicObject['卷']){
+                        vol.append($('<button type="button" class="btn btn-default btn-md">第' + i + '卷</button>'))
+                    }
+                }
+                if (!$.isEmptyObject(comicObject['话'])){
+                    // console.log(2)
+                    let episode = $('[number='+item['编号']+'] [menu=episode]')
+                    for (let i in comicObject['话']){
+                        episode.append($('<button type="button" class="btn btn-default btn-md">第' + i + '话</button>'))
+                    }
+                }
+                if (!$.isEmptyObject(comicObject['番外'])){
+                    // console.log(3)
+                    let special = $('[number='+item['编号']+'] [menu=special]')
+                    for (let i in comicObject['番外']){
+                        special.append($('<button type="button" class="btn btn-default btn-md">' + i + '</button>'))
+                    }
+                }
             }
             headElement.appendChild(scriptElement)
-            
         },
         loadPage: function(num, vol, episode, special){
             console.log(num, vol, episode, special)
