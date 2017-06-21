@@ -22,7 +22,7 @@ class Comic(BaseModel):
 class Episode(BaseModel):
     comic = peewee.ForeignKeyField(Comic, related_name='comic_episode')
     vol = peewee.IntegerField(null=True)
-    episode = peewee.FloatField(null=True)
+    episode = peewee.IntegerField(null=True)
     special = peewee.CharField(null=True)
 
 
@@ -53,7 +53,7 @@ def updateEpisode(comic, comicObj):
                 # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, vol=vol)
                 episodeObj = Episode.create(comic=comicObj, vol=vol)
             elif index == 1:
-                episode = float(item)
+                episode = int(item)
                 # query = Episode.select().where((Episode.comic==comicObj) & (Episode.episode==episode))
                 # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, episode=episode)
                 episodeObj = Episode.create(comic=comicObj, episode=episode)
@@ -80,9 +80,9 @@ def getIndex():
         comicIndex['编号'] = comicObj.comicID
         comicIndex['名称'] = comicObj.name
         comicIndex['作者'] = comicObj.author
-        comicIndex['卷'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.vol != None)))
-        comicIndex['话'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.episode != None)))
-        comicIndex['番外'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.special != None)))
+        # comicIndex['卷'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.vol != None)))
+        # comicIndex['话'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.episode != None)))
+        # comicIndex['番外'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.special != None)))
         index.append(comicIndex)
     return index
 

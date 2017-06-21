@@ -12,8 +12,8 @@ def generateIndex(comicIndex):
 
 def generateComic(comicIndex):
     for comic in comicIndex:
-        if comic['卷'] + comic['话'] + comic['番外'] == 0:
-            continue
+        # if comic['卷'] + comic['话'] + comic['番外'] == 0:
+        #     continue
         comicPage = db.getComic(comic)
         comicStr = 'extLink[' + str(comic['编号']) + '] = \n' + json.dumps(comicPage, ensure_ascii=False, indent=2)
         with open(os.path.join(GENERATE_FOLDER, str(comic['编号']) + '.js'), 'w', encoding='utf8') as comicFile:
