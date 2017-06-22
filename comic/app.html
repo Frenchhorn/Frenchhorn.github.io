@@ -9,9 +9,9 @@
     <script type="text/javascript" src="index.js"></script>
     <script>
         var extLink = {}
-        // for (let i=1; i<index.length+1; i++){
-        //     extLink[i] = null
-        // }
+        for (let i=1; i<index.length+1; i++){
+            extLink[i] = null
+        }
     </script>
     <style type="text/css">
         #searchResult .panel-info{
@@ -47,20 +47,17 @@
                             <span class="glyphicon glyphicon-plus"></span> 目录
                         </button>
                         <br><br>
-                        <!--
-                        <div v-if="item['卷'] !== 0">
-                            <button type="button" class="btn btn-default btn-md" v-for="vol in item['卷']" v-on:click="loadPage(item['编号'], vol)">第{{ vol }}卷</button> 
+                        <div v-if="extLink[item['编号']]">
+                            <div v-if="!isEmptyObject(extLink[item['编号']]['卷'])">
+                                <button type="button" class="btn btn-default btn-md" v-for="vol in Object.keys(extLink[item['编号']]['卷'])">第{{ vol }}卷</button> 
+                            </div>
+                            <div v-if="!isEmptyObject(extLink[item['编号']]['话'])">
+                                <button type="button" class="btn btn-default btn-md" v-for="episode in Object.keys(extLink[item['编号']]['话'])">第{{ episode }}话</button>
+                            </div>
+                            <div v-if="!isEmptyObject(extLink[item['编号']]['番外'])">
+                                <button type="button" class="btn btn-default btn-md" v-for="special in Object.keys(extLink[item['编号']]['番外'])">{{ special }}</button>
+                            </div>
                         </div>
-                        <div v-if="item['话'] !== 0">
-                            <button type="button" class="btn btn-default btn-md" v-for="episode in item['话']" v-on:click="loadPage(item['编号'], null, episode)">第{{ episode }}话</button>
-                        </div>
-                        <div v-if="item['番外'] !== 0">
-                            <button type="button" class="btn btn-default btn-md" v-for="special in item['番外']" v-on:click="loadPage(item['编号'], null, null, special)">{{ special }}</button>
-                        </div>
-                        -->
-                        <div menu="vol"></div>
-                        <div menu="episode"></div>
-                        <div menu="special"></div>
                     </div>
                 </div>
             </div>
@@ -126,9 +123,10 @@ var searchResult = new Vue({
     data: {
         seen: true,
         index: index,
-        // extLink: extLink,
+        extLink: extLink,
     },
     methods: {
+        isEmptyObject: jQuery.isEmptyObject,
         showMenu: function(item){
             if (extLink[item['编号']]){
                 console.log('have loaded file')
@@ -137,36 +135,8 @@ var searchResult = new Vue({
             let headElement = document.getElementsByTagName("head")[0]
             let scriptElement = document.createElement("script")
             scriptElement.src = 'generate/' + item['编号'] + '.js'
-            scriptElement.onload = function(){
-                let comicObject = extLink[item['编号']]
-                console.log(comicObject)
-                if (!$.isEmptyObject(comicObject['卷'])){
-                    // console.log(1)
-                    let vol = $('[number='+item['编号']+'] [menu=vol]')
-                    for (let i in comicObject['卷']){
-                        vol.append($('<button type="button" class="btn btn-default btn-md">第' + i + '卷</button>'))
-                    }
-                }
-                if (!$.isEmptyObject(comicObject['话'])){
-                    // console.log(2)
-                    let episode = $('[number='+item['编号']+'] [menu=episode]')
-                    for (let i in comicObject['话']){
-                        episode.append($('<button type="button" class="btn btn-default btn-md">第' + i + '话</button>'))
-                    }
-                }
-                if (!$.isEmptyObject(comicObject['番外'])){
-                    // console.log(3)
-                    let special = $('[number='+item['编号']+'] [menu=special]')
-                    for (let i in comicObject['番外']){
-                        special.append($('<button type="button" class="btn btn-default btn-md">' + i + '</button>'))
-                    }
-                }
-            }
             headElement.appendChild(scriptElement)
         },
-        loadPage: function(num, vol, episode, special){
-            console.log(num, vol, episode, special)
-        }
     },
 })
 
