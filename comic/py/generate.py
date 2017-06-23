@@ -6,7 +6,7 @@ GENERATE_FOLDER = os.path.join('..', 'generate')
 
 def generateIndex(comicIndex):
     indexStr = 'var index = \n' + json.dumps(comicIndex, ensure_ascii=False, indent=2)
-    with open(os.path.join('..', 'index.js'), 'w', encoding='utf8') as indexFile:
+    with open(os.path.join(GENERATE_FOLDER, 'index.js'), 'w', encoding='utf8') as indexFile:
         indexFile.write(indexStr)
 
 
