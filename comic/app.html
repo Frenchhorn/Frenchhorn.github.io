@@ -49,13 +49,13 @@
                         <br><br>
                         <div v-if="extLink[item['编号']]">
                             <div v-if="!isEmptyObject(extLink[item['编号']]['卷'])">
-                                <button type="button" class="btn btn-default btn-md" v-for="vol in Object.keys(extLink[item['编号']]['卷'])">第{{ vol }}卷</button> 
+                                <button type="button" class="btn btn-default btn-md" v-for="vol in Object.keys(extLink[item['编号']]['卷'])" v-on:click="showPage(vol, extLink[item['编号']]['卷'])">第{{ vol }}卷</button> 
                             </div>
                             <div v-if="!isEmptyObject(extLink[item['编号']]['话'])">
-                                <button type="button" class="btn btn-default btn-md" v-for="episode in Object.keys(extLink[item['编号']]['话'])">第{{ episode }}话</button>
+                                <button type="button" class="btn btn-default btn-md" v-for="episode in Object.keys(extLink[item['编号']]['话'])" v-on:click="showPage(episode, extLink[item['编号']]['话'])">第{{ episode }}话</button>
                             </div>
                             <div v-if="!isEmptyObject(extLink[item['编号']]['番外'])">
-                                <button type="button" class="btn btn-default btn-md" v-for="special in Object.keys(extLink[item['编号']]['番外'])">{{ special }}</button>
+                                <button type="button" class="btn btn-default btn-md" v-for="special in Object.keys(extLink[item['编号']]['番外'])" v-on:click="showPage(special, extLink[item['编号']]['番外'])">{{ special }}</button>
                             </div>
                         </div>
                     </div>
@@ -136,6 +136,10 @@ var searchResult = new Vue({
             let scriptElement = document.createElement("script")
             scriptElement.src = 'generate/' + item['编号'] + '.js'
             headElement.appendChild(scriptElement)
+        },
+        showPage: function(key, dict){
+            console.log(key)
+            console.log(dict)
         },
     },
 })
