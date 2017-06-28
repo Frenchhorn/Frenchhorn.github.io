@@ -4,6 +4,13 @@
 
 `git clone https://github.com/Frenchhorn/Frenchhorn.github.io.git`
 
+更新:
+
+`git pull`
+
+离线使用(不需要git，需要获取github上的js文件)：
+
+https://github.com/Frenchhorn/Frenchhorn.github.io/archive/master.zip
 
 todo-list:
 
