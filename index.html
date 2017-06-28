@@ -6,7 +6,14 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <script type="text/javascript" src="js/vue.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="generate/index.js"></script>
+    <script>
+        var noGit = false
+        if (localStorage['comic-no-git'] === 'true'){
+            noGit = true
+        }
+        let src = (noGit) ? 'https://frenchhorn.github.io/generate/index.js' : 'generate/index.js'
+        document.write('<script type="text/javaScript" src="' + src + '"><\/script>')
+    </script>
     <script>
         var extLink = {}
         for (let i=1; i<index.length+1; i++){
@@ -65,6 +72,7 @@
     </div>
 </body>
 <script>
+
 var searchBar = new Vue({
     el: '#searchBar',
     data: {
@@ -122,8 +130,8 @@ var searchResult = new Vue({
     el: '#searchResult',
     data: {
         seen: true,
-        index: index,
-        extLink: extLink,
+        index: window.index,
+        extLink: window.extLink,
     },
     methods: {
         isEmptyObject: jQuery.isEmptyObject,
@@ -134,7 +142,9 @@ var searchResult = new Vue({
             }
             let headElement = document.getElementsByTagName("head")[0]
             let scriptElement = document.createElement("script")
-            scriptElement.src = 'generate/' + item['编号'] + '.js'
+            let src = (noGit) ? 'https://frenchhorn.github.io/' : ''
+            src += 'generate/' + item['编号'] + '.js'
+            scriptElement.src = src
             headElement.appendChild(scriptElement)
         },
         showPage: function(key, dict){
@@ -143,6 +153,7 @@ var searchResult = new Vue({
         },
     },
 })
+
 
 </script>
 </html>
