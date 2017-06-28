@@ -1,3 +1,10 @@
+在线: https://frenchhorn.github.io/
+
+离线使用：
+
+`git clone https://github.com/Frenchhorn/Frenchhorn.github.io.git`
+
+
 todo-list:
 
     * 编写前端页面，方便填写url，生成json文件
