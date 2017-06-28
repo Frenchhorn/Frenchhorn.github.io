@@ -1,6 +1,4 @@
-import os
-import json
-import imghdr
+import os, sys, json, imghdr
 from upload import uploadImages
 
 
@@ -15,11 +13,12 @@ def getPaths(folder):
 
 
 if __name__ == '__main__':
-    paths = getPaths(r'pics')
+    paths = getPaths(sys.argv[1])
     print(paths)
     r = uploadImages(paths)
-    if not r['errors']:
-        with open('pics.json', 'w') as f:
-            f.write(json.dumps(r['results'], ensure_ascii=False, indent=2))
-    else:
-        print(r['errors'])
+    file_name = os.path.basename(sys.argv[1]) + '.json'
+    with open(file_name, 'w') as f:
+        f.write(json.dumps(r['results'], ensure_ascii=False, indent=2))
+    if r['errors']:
+        with open('errors.json', 'w') as f:
+            f.write(json.dumps(r['errors'], ensure_ascii=False, indent=2))
