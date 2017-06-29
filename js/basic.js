@@ -74,7 +74,31 @@ var searchResult = new Vue({
         },
         showPage: function(key, dict){
             console.log(dict[key])
-            // console.log(dict)
+            searchBar.seen = false
+            searchResult.seen = false
+            comicViewer.args.pics = dict[key]
         },
+    },
+})
+
+var comicViewer = new Vue({
+    el: '#comicViewer',
+    data: {
+        seen: true,
+        args: {
+            pics: null,
+            source: 0,
+            num: 0,
+        }
+    },
+    methods: {
+        next: function(){
+            console.log('next page')
+            if (this.args.num + 1 < this.args.pics[this.args.source].length){
+                this.args.num += 1
+            } else {
+                this.args.num = 0
+            }
+        }
     },
 })

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>Comic</title>
-    <link rel="shortcut icon" href="pics/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/basic.css">
     <script>
@@ -25,7 +25,7 @@
 
 <body>
     <div class="container">
-        <div class="row" id="searchBar" v-if="seen">
+        <div class="row" id="searchBar" v-show="seen">
             <div class="col-md-10 col-md-offset-1 jumbotron text-center">
                 <div class="input-group">
                     <span class="input-group-addon" style="cursor:pointer" onselectstart="return false" v-on:click="changeSearchType">{{ searchArgs.searchType }}</span>
@@ -34,7 +34,7 @@
             </div>
         </div>
 
-        <div class="row" id="searchResult" v-if="seen">
+        <div class="row" id="searchResult" v-show="seen">
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-info" v-for="item in index" v-bind:number="item['编号']" v-bind:comic="item['名称']" v-bind:author="item['作者']">
                     <div class="panel-heading">
@@ -65,11 +65,7 @@
         <div class="row" id="comicViewer" v-if="seen">
             <div class="col-md-10" style="padding-left: 0px;padding-right: 0px;">
                 <dl class="dl-horizontal">
-                    <dd><img class="center-block" src="pics/1.jpg"></dd>
-                    <dd><img class="center-block" src="pics/2.jpg"></dd>
-                    <dd><img class="center-block" src="pics/3.jpg"></dd>
-                    <dd><img class="center-block" src="pics/4.jpg"></dd>
-                    <dd><img class="center-block" src="pics/5.jpg"></dd>
+                    <dd><img class="center-block" v-bind:src="(args.pics && args.pics.length !== 0) ? args.pics[args.source][args.num] : null" v-on:click="next()"></dd>
                 </dl>
             </div>
         </div>
