@@ -1,0 +1,15 @@
+#searchResult .panel-info{
+    display: none;
+}
+#searchResult .panel-body button.btn-md{
+    margin-right: 5px; 
+    margin-top: 5px;
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .dl-horizontal dd {
+        margin-left: 0px;
+    }
+}
+img {
+    max-width: 120%
+}
