@@ -62,10 +62,10 @@
             </div>
         </div>
 
-        <div class="row" id="comicViewer" v-if="seen">
+        <div class="row" id="comicViewer" v-show="seen">
             <div class="col-md-10" style="padding-left: 0px;padding-right: 0px;">
                 <dl class="dl-horizontal">
-                    <dd><img class="center-block" v-bind:src="(pics && pics.length !== 0) ? pics[pics_num][page_num] : null" v-on:click="next_page()"></dd>
+                    <dd><img class="center-block" v-bind:src="img_src" v-on:click="next_page()"></dd>
                 </dl>
             </div>
         </div>

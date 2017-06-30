@@ -55,8 +55,8 @@ var searchResult = new Vue({
     el: '#searchResult',
     data: {
         seen: true,
-        index: window.index,
-        extLink: window.extLink,
+        index: index,
+        extLink: extLink,
     },
     methods: {
         isEmptyObject: jQuery.isEmptyObject,
@@ -97,6 +97,18 @@ var comicViewer = new Vue({
         pics_num: 0,
         page_num: 0,
     },
+    computed: {
+        img_src: function(){
+            if (this.pics && this.pics.length !== 0) {
+                return this.pics[this.pics_num][this.page_num]
+            } else {
+                return ''
+            }
+        },
+        is_special: function(){
+            return isNaN(Number(this.episode_num))
+        }
+    },
     methods: {
         pre_page: function(){
             console.log('pre page')
@@ -115,11 +127,13 @@ var comicViewer = new Vue({
             }
         },
         pre_episode: function(){
-            this.page_num = 0
-            episode_num = Number(this.episode_num)
-            if (isNaN(episode_num)) {
+            if (this.is_special) {
                 console.log('special episode')
-            } else if (episode_num === 1) {
+                return false
+            }
+            this.page_num = 0
+            this.episode_num = Number(this.episode_num)
+            if (this.episode_num === 1) {
                 console.log('first episode')
             } else {
                 console.log('pre episode')
@@ -128,13 +142,12 @@ var comicViewer = new Vue({
             }
         },
         next_episode: function(){
-            this.page_num = 0
-            episode_num = Number(this.episode_num)
-            if (isNaN(episode_num)) {
+            if (this.is_special) {
                 console.log('special episode')
                 return false
             }
-            this.episode_num = String((episode_num + 1))
+            this.page_num = 0
+            this.episode_num = String((Number(this.episode_num) + 1))
             if (!this.episode[this.episode_num]) {
                 console.log('last episode')
                 searchBar.seen = true
