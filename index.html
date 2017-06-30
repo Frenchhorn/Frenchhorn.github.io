@@ -29,7 +29,7 @@
             <div class="col-md-10 col-md-offset-1 jumbotron text-center">
                 <div class="input-group">
                     <span class="input-group-addon" style="cursor:pointer" onselectstart="return false" v-on:click="changeSearchType">{{ searchArgs.searchType }}</span>
-                    <input v-on:keyup="search" v-model="value" type="text" required="" placeholder="请输入搜索关键字" class="form-control input-lg">
+                    <input v-on:keyup.stop="search" v-model="value" type="text" required="" placeholder="请输入搜索关键字" class="form-control input-lg">
                 </div>
             </div>
         </div>
@@ -65,7 +65,7 @@
         <div class="row" id="comicViewer" v-if="seen">
             <div class="col-md-10" style="padding-left: 0px;padding-right: 0px;">
                 <dl class="dl-horizontal">
-                    <dd><img class="center-block" v-bind:src="(args.pics && args.pics.length !== 0) ? args.pics[args.source][args.num] : null" v-on:click="next()"></dd>
+                    <dd><img class="center-block" v-bind:src="(pics && pics.length !== 0) ? pics[pics_num][page_num] : null" v-on:click="next_page()"></dd>
                 </dl>
             </div>
         </div>

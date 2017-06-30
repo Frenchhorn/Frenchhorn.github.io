@@ -73,10 +73,16 @@ var searchResult = new Vue({
             headElement.appendChild(scriptElement)
         },
         showPage: function(key, dict){
+            console.log(dict)
             console.log(dict[key])
             searchBar.seen = false
             searchResult.seen = false
-            comicViewer.args.pics = dict[key]
+            comicViewer.episode = dict
+            comicViewer.episode_num = key
+            comicViewer.pics = dict[key]
+            comicViewer.pics_num = 0
+            comicViewer.page_num = 0
+            comicViewer.seen = true
         },
     },
 })
@@ -84,21 +90,66 @@ var searchResult = new Vue({
 var comicViewer = new Vue({
     el: '#comicViewer',
     data: {
-        seen: true,
-        args: {
-            pics: null,
-            source: 0,
-            num: 0,
-        }
+        seen: false,
+        episode: null,
+        episode_num: null,
+        pics: null,
+        pics_num: 0,
+        page_num: 0,
     },
     methods: {
-        next: function(){
-            console.log('next page')
-            if (this.args.num + 1 < this.args.pics[this.args.source].length){
-                this.args.num += 1
+        pre_page: function(){
+            console.log('pre page')
+        },
+        next_page: function(){
+            if (this.page_num + 1 < this.pics[this.pics_num].length){
+                console.log('next page')
+                this.page_num += 1
             } else {
-                this.args.num = 0
+                this.next_episode()
             }
-        }
+        },
+        pre_episode: function(){
+            this.page_num = 0
+            console.log('pre episode')
+        },
+        next_episode: function(){
+            this.page_num = 0
+            episode_num = Number(this.episode_num)
+            if (isNaN(episode_num)) {
+                console.log('special episode')
+                return false
+            }
+            console.log('next episode')
+            this.episode_num = String((episode_num + 1))
+            if (!this.episode[this.episode_num]) {
+                console.log('last episode')
+                searchBar.seen = true
+                searchResult.seen = true
+                this.seen = false
+                return false
+            }
+            this.pics = this.episode[this.episode_num]
+        },
     },
+})
+
+var viewer = $('#comicViewer img')
+$('html').on('keyup', function(event) {
+    if (!viewer.is(':visible')) {
+        return false
+    }
+    if (event.which === 37) {          // left
+        comicViewer.pre_episode()
+    } else if (event.which === 38) {   // up
+        comicViewer.pre_page()
+    } else if (event.which === 39) {   // right
+        comicViewer.next_episode()
+    } else if (event.which === 40) {   // down
+        comicViewer.next_page()
+    } else if (event.which === 27) {   // esc
+        searchBar.seen = true
+        searchResult.seen = true
+        comicViewer.seen = false
+    }
 })
