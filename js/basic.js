@@ -100,6 +100,11 @@ var comicViewer = new Vue({
     methods: {
         pre_page: function(){
             console.log('pre page')
+            if (this.page_num === 0) {
+                console.log('first page')
+            } else {
+                this.page_num -= 1
+            }
         },
         next_page: function(){
             if (this.page_num + 1 < this.pics[this.pics_num].length){
@@ -111,7 +116,16 @@ var comicViewer = new Vue({
         },
         pre_episode: function(){
             this.page_num = 0
-            console.log('pre episode')
+            episode_num = Number(this.episode_num)
+            if (isNaN(episode_num)) {
+                console.log('special episode')
+            } else if (episode_num === 1) {
+                console.log('first episode')
+            } else {
+                console.log('pre episode')
+                this.episode_num = String((episode_num - 1))
+                this.pics = this.episode[this.episode_num]
+            }
         },
         next_episode: function(){
             this.page_num = 0
@@ -120,7 +134,6 @@ var comicViewer = new Vue({
                 console.log('special episode')
                 return false
             }
-            console.log('next episode')
             this.episode_num = String((episode_num + 1))
             if (!this.episode[this.episode_num]) {
                 console.log('last episode')
@@ -128,8 +141,10 @@ var comicViewer = new Vue({
                 searchResult.seen = true
                 this.seen = false
                 return false
+            } else {
+                console.log('next episode')
+                this.pics = this.episode[this.episode_num]
             }
-            this.pics = this.episode[this.episode_num]
         },
     },
 })
