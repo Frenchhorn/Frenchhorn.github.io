@@ -67,8 +67,7 @@ var searchResult = new Vue({
             }
             let headElement = document.getElementsByTagName("head")[0]
             let scriptElement = document.createElement("script")
-            let src = (noGit) ? 'https://frenchhorn.github.io/' : ''
-            src += 'generate/' + item['编号'] + '.js'
+            let src = 'generate/' + item['编号'] + '.js'
             scriptElement.src = src
             headElement.appendChild(scriptElement)
         },

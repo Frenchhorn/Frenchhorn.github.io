@@ -7,14 +7,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="css/basic.css">
-    <script>
-        var noGit = false
-        if (localStorage['comic-no-git'] === 'true'){
-            noGit = true
-        }
-        let src = (noGit) ? 'https://frenchhorn.github.io/generate/index.js' : 'generate/index.js'
-        document.write('<script type="text/javaScript" src="' + src + '"><\/script>')
-    </script>
+    <script type="text/javaScript" src="generate/index.js"></script>
     <script>
         var extLink = {}
         for (let i of index){
