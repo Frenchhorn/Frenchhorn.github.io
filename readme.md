@@ -19,3 +19,5 @@ todo-list:
     json文件的时间判断
 
     url的重复判断
+
+    添加log功能
