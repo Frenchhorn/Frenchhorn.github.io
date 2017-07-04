@@ -136,7 +136,7 @@ var comicViewer = new Vue({
                 console.log('first episode')
             } else {
                 console.log('pre episode')
-                this.episode_num = String((episode_num - 1))
+                this.episode_num = String((this.episode_num - 1))
                 this.pics = this.episode[this.episode_num]
             }
         },
