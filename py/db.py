@@ -1,11 +1,13 @@
-import os.path
+import os
+import logging, logging.config
 import peewee
 from collections import OrderedDict
 
+logging.config.fileConfig("logger.conf")
+logger = logging.getLogger("dev")
 DATABASE = os.path.join('..', 'comic.db')
 
 db = peewee.SqliteDatabase(DATABASE)
-
 
 # define tables
 class BaseModel(peewee.Model):
