@@ -37,11 +37,17 @@ class Page(BaseModel):
 # for collect.py
 def updateComic(comic):
     query = Comic.select().where(Comic.comicID == comic.get('编号'))
-    comicObj = query.get() if (len(query) != 0) else Comic.create(comicID=comic.get('编号'), name=comic.get('名称'), author=comic.get('作者'))
-    updateEpisode(comic, comicObj)
+    logger.debug('查询 %s(%s) 是否已存在' % (comic.get('名称'), comic.get('编号')))
+    if len(query) != 0:
+        logger.debug('获取成功')
+        comicObj = query.get()
+    else:
+        logger.debug('获取失败，创建新Comic [%s %s %s]' % (comic.get('编号'), comic.get('名称'), comic.get('作者')))
+        comicObj = Comic.create(comicID=comic.get('编号'), name=comic.get('名称'), author=comic.get('作者'))
+    createEpisodes(comic, comicObj)
 
 
-def updateEpisode(comic, comicObj):
+def createEpisodes(comic, comicObj):
     vols = comic.get('卷')
     episodes = comic.get('话')
     specials = comic.get('番外')
@@ -51,24 +57,21 @@ def updateEpisode(comic, comicObj):
         for item, pages in itemDict.items():
             if index == 0:
                 vol = int(item)
-                # query = Episode.select().where((Episode.comic==comicObj) & (Episode.vol==vol))
-                # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, vol=vol)
+                logger.debug('创建新Episode [第%d卷]' % vol)
                 episodeObj = Episode.create(comic=comicObj, vol=vol)
             elif index == 1:
                 episode = int(item)
-                # query = Episode.select().where((Episode.comic==comicObj) & (Episode.episode==episode))
-                # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, episode=episode)
+                logger.debug('创建新Episode [第%d话]' % episode)
                 episodeObj = Episode.create(comic=comicObj, episode=episode)
             elif index == 2:
                 special = str(item)
-                # query = Episode.select().where((Episode.comic==comicObj) & (Episode.special==special))
-                # episodeObj = query.get() if (len(query) != 0) else Episode.create(comic=comicObj, special=special)
+                logger.debug('创建新Episode [%s]' % special)
                 episodeObj = Episode.create(comic=comicObj, special=special)
+            createPages(episodeObj, pages)
 
-            updatePage(episodeObj, pages)
 
-
-def updatePage(episodeObj, pages):
+def createPages(episodeObj, pages):
+    logger.debug('创建新Page 共%d页' % len(pages))
     for index, value in enumerate(pages):
         Page.create(episode=episodeObj, page=index+1, url=value)
 
@@ -82,9 +85,6 @@ def getIndex():
         comicIndex['编号'] = comicObj.comicID
         comicIndex['名称'] = comicObj.name
         comicIndex['作者'] = comicObj.author
-        # comicIndex['卷'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.vol != None)))
-        # comicIndex['话'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.episode != None)))
-        # comicIndex['番外'] = len(Episode.select().where((Episode.comic==comicObj) & (Episode.special != None)))
         index.append(comicIndex)
     return index
 
@@ -132,6 +132,7 @@ def initDatabase():
 
 # simple test
 def test():
+    logger.debug('创建测试数据')
     Comic.create(comicID=1, name='东方铃奈庵', author='春河もえ/zun')
     Comic.create(comicID=2, name='四叶妹妹')
     comic3 = Comic.create(comicID=3, name='迷你偶像', author='明音')
@@ -143,4 +144,5 @@ def test():
 
 if __name__ == '__main__':
     if not os.path.isfile(DATABASE):
+        logger.info('创建数据库 %s' % DATABASE)
         initDatabase()

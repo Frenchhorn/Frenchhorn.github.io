@@ -1,6 +1,7 @@
 import os
 import json
 import db
+from db import logger
 
 GENERATE_FOLDER = os.path.join('..', 'generate')
 
