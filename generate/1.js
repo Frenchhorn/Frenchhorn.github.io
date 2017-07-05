@@ -6,21 +6,21 @@ extLink[1] =
   "卷": {
     "1": [
       [
-        "test/3.jpg",
-        "test/4.jpg"
-      ],
-      [
         "test/1.jpg",
         "test/2.jpg"
+      ],
+      [
+        "test/3.jpg",
+        "test/4.jpg"
       ]
     ],
     "2": [
       [
-        "test/5.jpg",
+        "test/3.jpg",
         "test/4.jpg"
       ],
       [
-        "test/3.jpg",
+        "test/5.jpg",
         "test/4.jpg"
       ]
     ]
@@ -28,21 +28,21 @@ extLink[1] =
   "话": {
     "1": [
       [
-        "test/3.jpg",
-        "test/4.jpg"
-      ],
-      [
         "test/1.jpg",
         "test/2.jpg"
+      ],
+      [
+        "test/3.jpg",
+        "test/4.jpg"
       ]
     ],
     "2": [
       [
-        "test/5.jpg",
+        "test/3.jpg",
         "test/4.jpg"
       ],
       [
-        "test/3.jpg",
+        "test/5.jpg",
         "test/4.jpg"
       ]
     ]
@@ -50,21 +50,21 @@ extLink[1] =
   "番外": {
     "番外1": [
       [
-        "test/3.jpg",
-        "test/4.jpg"
-      ],
-      [
         "test/1.jpg",
         "test/2.jpg"
+      ],
+      [
+        "test/3.jpg",
+        "test/4.jpg"
       ]
     ],
     "番外2": [
       [
-        "test/5.jpg",
+        "test/3.jpg",
         "test/4.jpg"
       ],
       [
-        "test/3.jpg",
+        "test/5.jpg",
         "test/4.jpg"
       ]
     ]
