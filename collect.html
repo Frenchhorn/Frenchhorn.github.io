@@ -3,49 +3,29 @@
 <head>
     <!-- https://github.com/rndme/download -->
     <title>Collect</title>
-    <script type="text/javascript" src="js/lib/download.js"></script>
-    <script>
-        var test1 = function(){
-            download("hello world", "dlText.txt", "text/plain");
-        }
-        var test2 = function(){
-            download("data:text/plain,hello%20world", "dlDataUrlText.txt", "text/plain");
-        }
-        var test3 = function(){
-            download(new Blob(["hello world"]), "dlTextBlob.txt", "text/plain");
-        }
-        var test4 = function(){
-            download("readme.md");
-        }
-        var test5 = function(){
-            download(document.documentElement.outerHTML, "index.html", "text/html");
-        }
-        var test6 = function(){
-            $.ajax({
-                url: "index.html",
-                success: download.bind(true, "text/html", "dlAjaxCallback.html")
-            });
-        }
-        var test7 = function(){
-            download("favicon.ico");
-        }
-        var test8 = function(){
-            var x=new XMLHttpRequest();
-            x.open( "GET", "favicon.ico" , true);
-            x.responseType="blob";
-            x.onload= function(e){download(e.target.response, "awesomesauce.png", "image/x-icon");};
-            x.send();
-        }
-    </script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
-    <button onclick="test1()">1</button>
-    <button onclick="test2()">2</button>
-    <button onclick="test3()">3</button>
-    <button onclick="test4()">4</button>
-    <button onclick="test5()">5</button>
-    <button onclick="test6()">6</button>
-    <button onclick="test7()">7</button>
-    <button onclick="test8()">8</button>
+    <a id="download" v-bind:download="filename" v-bind:href="content"><button>123</button></a>
 </body>
+<script type="text/javascript" src="js/lib/jquery.min.js"></script>
+<script type="text/javascript" src="js/lib/vue.js"></script>
+<!-- <script type="text/javascript" src="js/lib/vue.min.js"></script> -->
+<script>
+    var downloadButton = new Vue({
+        el: '#download',
+        data: {
+            jsonObj: {'a':123,'b':'测试','c':[1,2,3,4],'d':{1:['a','a']}}
+        },
+        computed: {
+            filename: function(){
+                return 'test.json'
+            },
+            content: function(){
+                return 'data:text/plain,' + JSON.stringify(this.jsonObj)
+            }
+        }
+    })
+</script>
 </html>
