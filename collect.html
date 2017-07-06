@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- https://github.com/rndme/download -->
+    <title>Collect</title>
+    <script type="text/javascript" src="js/lib/download.js"></script>
+    <script>
+        var test1 = function(){
+            download("hello world", "dlText.txt", "text/plain");
+        }
+        var test2 = function(){
+            download("data:text/plain,hello%20world", "dlDataUrlText.txt", "text/plain");
+        }
+        var test3 = function(){
+            download(new Blob(["hello world"]), "dlTextBlob.txt", "text/plain");
+        }
+        var test4 = function(){
+            download("readme.md");
+        }
+        var test5 = function(){
+            download(document.documentElement.outerHTML, "index.html", "text/html");
+        }
+        var test6 = function(){
+            $.ajax({
+                url: "index.html",
+                success: download.bind(true, "text/html", "dlAjaxCallback.html")
+            });
+        }
+        var test7 = function(){
+            download("favicon.ico");
+        }
+        var test8 = function(){
+            var x=new XMLHttpRequest();
+            x.open( "GET", "favicon.ico" , true);
+            x.responseType="blob";
+            x.onload= function(e){download(e.target.response, "awesomesauce.png", "image/x-icon");};
+            x.send();
+        }
+    </script>
+</head>
+<body>
+    <button onclick="test1()">1</button>
+    <button onclick="test2()">2</button>
+    <button onclick="test3()">3</button>
+    <button onclick="test4()">4</button>
+    <button onclick="test5()">5</button>
+    <button onclick="test6()">6</button>
+    <button onclick="test7()">7</button>
+    <button onclick="test8()">8</button>
+</body>
+</html>
