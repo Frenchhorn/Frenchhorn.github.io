@@ -6,23 +6,57 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 </head>
 <body>
-    <a id="download" v-bind:download="filename" v-bind:href="content"><button>123</button></a>
+    <div id="collect">
+        编号: <input v-model.trim="comicNumber" type="number" name="number">
+        <br>
+        名称: <input v-model.trim="comicName" type="text" name="name">
+        <br>
+        作者: <input v-model.trim="comicAuthor" type="text" name="name">
+        <br>
+        <select v-model="episodeType">
+            <option value="话">话</option>
+            <option value="卷">卷</option>
+            <option value="番外">番外</option>
+        </select>
+        <button v-on:click="changeType">话</button>
+        <input v-model="episode" type="text" name="type">
+        <br>
+        链接: <textarea v-model.trim="pages" type="" name=""></textarea>
+        <br>
+        <a v-bind:download="filename" v-bind:href="content" style="color: black"><button>下载json文件</button></a>
+    </div>
 </body>
 <script type="text/javascript" src="js/lib/jquery.min.js"></script>
 <script type="text/javascript" src="js/lib/vue.js"></script>
 <!-- <script type="text/javascript" src="js/lib/vue.min.js"></script> -->
 <script>
     var downloadButton = new Vue({
-        el: '#download',
+        el: '#collect',
         data: {
-            jsonObj: {'a':123,'b':'测试','c':[1,2,3,4],'d':{1:['a','a']}}
+            comicNumber: '',
+            comicName: '',
+            comicAuthor: '',
+            episodeType: '',
+            episode: '',
+            pages: '123123\naqwer'
         },
         computed: {
+            jsonObj: function(){
+                let vol = {}
+                let episode = {}
+                let special = {}
+                return [{"编号":this.comicNumber,"名称":this.comicName,"作者":this.comicAuthor,'卷':vol,'话':episode,'番外':special}]
+            },
             filename: function(){
                 return 'test.json'
             },
             content: function(){
                 return 'data:text/plain,' + JSON.stringify(this.jsonObj)
+            }
+        },
+        methods: {
+            changeType: function(){
+                console.log(123)
             }
         }
     })
