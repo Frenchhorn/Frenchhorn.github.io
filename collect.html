@@ -7,22 +7,31 @@
 </head>
 <body>
     <div id="collect">
-        编号: <input v-model.trim="comicNumber" type="number" name="number">
-        <br>
-        名称: <input v-model.trim="comicName" type="text" name="name">
-        <br>
-        作者: <input v-model.trim="comicAuthor" type="text" name="name">
-        <br>
-        <select v-model="episodeType">
-            <option value="话">话</option>
-            <option value="卷">卷</option>
-            <option value="番外">番外</option>
-        </select>
-        <button v-on:click="changeType">话</button>
-        <input v-model="episode" type="text" name="type">
-        <br>
-        链接: <textarea v-model.trim="pages" type="" name=""></textarea>
-        <br>
+        <div>
+            <label>编号</label>
+            <input v-model.trim="comicNumber" type="number" name="number">
+        </div>
+        <div>
+            <label>名称</label>
+            <input v-model.trim="comicName" type="text" name="name">
+        </div>
+        <div>
+            <label>作者</label>
+            <input v-model.trim="comicAuthor" type="text" name="name">
+        </div>
+        <div>
+            <select v-model="episodeType">
+                <option value="话">话</option>
+                <option value="卷">卷</option>
+                <option value="番外">番外</option>
+            </select>
+            <button v-on:click="changeType">话</button>
+            <input v-model="episode" type="text" name="type">
+        </div>
+        <div>
+            <label>链接</label>
+            <textarea v-model.trim="pages" type="" name=""></textarea>
+        </div>
         <a v-bind:download="filename" v-bind:href="content" style="color: black"><button>下载json文件</button></a>
     </div>
 </body>
